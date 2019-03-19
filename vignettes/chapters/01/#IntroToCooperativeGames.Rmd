@@ -1,0 +1,721 @@
+---
+title: "Introduction to Cooperative Games"
+author: "Jochen Staudacher"
+date: "6 March 2019"
+output: pdf_document
+---
+
+# Introduction to Cooperative Games
+
+Today, the term 
+game theory is mostly interpreted as 
+interactive decision theory,
+i.e. game theorists wish to 
+study how agents take strategic 
+decisions interactively. Since the publication 
+of the seminal 
+book "Theory of Games and Economic Behavior" by 
+John von Neumann and 
+Oskar Morgenstern [@NeumannMorgenstern] 
+in 1944, modern game theory developed into two main branches. 
+These two branches are most frequently referred to as 
+noncooperative game theory and cooperative game theory, 
+respectively. In our understanding of the field we side with 
+the views expressed by Nobel laureate Robert Aumann in his 
+famous interview [@vanDammeAumann] with Eric van Damme that 
+a better name for noncooperative game theory 
+would be "strategically oriented game theory" whereas 
+cooperative game might be characterized more precisely 
+as "coalitional game theory" or "outcome oriented game theory".
+
+In the introduction of this vignette we wish to borrow 
+a thought from the first chapter of the book by 
+Peleg and Sudhölter [@PelegSudhoelter]. In the seminal 
+papers [@Peleg1996] and [@Peleg1997] Bezalel 
+Peleg pointed out 
+that Nash's program could not be implemented, i.e. that 
+it is not possible to express each and every cooperative 
+game as a noncooperative game in extensive
+form with the solution of the cooperative game
+being defined in terms of equilibrium points of the 
+corresponding noncooperative game. 
+
+In other words: Peleg's results from 
+[@Peleg1996] and [@Peleg1997] removed any doubts 
+that cooperative game theory was truly a theory 
+of its own right.
+So, to quote Robert Aumann (see [@vanDammeAumann], p. 195) again 
+```
+... It is not only strategic interaction.
+```
+In this spirit our R-package `CoopGame` is devoted 
+to the study of coalitional games 
+with transferable utility and aims to provide a 
+comprehensive set of methods. 
+
+## What this package provides and what it does not provide
+
+The package `CoopGame` focusses on a cost-savings approach to
+cooperative games.
+
+We are studying a transferable utility game (TU game) $v$ in 
+characteristic function form consisting of the 
+player set $N =\{ 1, \dots , n \}$ and the characteristic
+function $v: 2^{N} \to \mathbb{R}$ with $v (\emptyset) = 0$.
+We specify such a TU game with $n$ players as a (game) vector 
+of length $2^n - 1$.
+
+### Vignette for version 0.2.1 of `CoopGame`
+
+This is the place to emphasize once again that this vignette 
+accompanies version 0.2.1 of the `R` package `CoopGame`. 
+Future releases of `CoopGame` might incorporate additional 
+functionality and will be accompanied by an update of this 
+vignette. 
+
+### Specifying a TU game
+
+Let us look at an introductory example of a three-player 
+TU game. Let $N= \{ 1, 2, 3 \}$ and 
+$v: \mathcal{P}(N) \to \mathbb{R}$ 
+be specified as   
+$$ 
+\begin{aligned}
+v(\emptyset) & =  0, \\  
+v(\{ 1 \}) & =  0, \\
+v(\{ 2 \}) & =  0, \\ 
+v(\{ 3 \}) & =  0, \\
+v(\{ 1,2 \}) & =  100, \\ 
+v(\{ 1,3 \}) & =  115, \\ 
+v(\{ 2,3 \}) & =  125, \\
+v(\{ 1,2,3 \}) & =  220. 
+\end{aligned}
+$$
+We may interpret the values of the individual coalitions 
+in various ways, e.g. as the worth of a coalition or the 
+cost-savings of a coalition. In our above example the singleton 
+coalitions have worth zero whereas the grand coalition 
+$N= \{ 1, 2, 3 \}$ makes a total of $220$ (monetary units). 
+In brief, the 
+basic question in coalitional games with transferable utility 
+is how we can share the worth of $220$ among our three players.
+In `R` we can simply specify the above game as a vector $v$ of 
+lenght $7$, i.e.
+```{r, collapse=TRUE}
+library(CoopGame)
+(v <- c(0,0,0,100,115,125,220))
+```
+
+Sometimes it is convenient to use the shorthand notations 
+$$ v_{i} = v(\{ i \}) \quad \textrm{for} \quad i=1, \dots , n, $$
+for the singleton coalitions.
+
+### A popular example: The Maschler game
+
+Throughout this vignette we will frequently employ the 
+following three-player example
+$$ 
+v(C) = \Bigg\{  
+\begin{aligned}
+0, & \quad \vert C \vert = 1 \\
+60, & \quad \vert C \vert = 2 \\
+72, & \quad \vert C \vert = 3
+\end{aligned}
+$$
+
+It appears in the article [@AumannMyerson] where the 
+authors attribute it to the famous Israeli 
+game theorist Michael Maschler. The above 
+game has thus frequently been 
+referred to as the Maschler game in the literature since.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+(Maschler <- c(0,0,0,60,60,60,72))
+```
+
+### Functionality and structure of the package `CoopGame`
+
+The package `CoopGame` provides functions for 
+
+* generating TU games with special structure (see chapter 2 
+of this vignette), like 
+e.g. bankruptcy games, cost games, weighted voting 
+games and unanimity games 
+* checking game properties (see chapter 3 of this vignette), 
+like e.g. superadditivity, convexity and balancedness
+* computing a number of set-valued solution concepts for 
+TU games (see chapter 4 
+of this vignette), including the core and various core catchers
+* computing a large array of point-valued solution concepts 
+for TU games (see chapter 5 
+of this vignette), 
+including the Shapley value, the nucleolus as well as 
+various nucleolus derivatives and numerous power indices 
+* drawing both set- and point-valued solution concepts 
+for the 3- and 4-player cases (see chapter 6 of this vignette)
+* some general functionality useful in the context of TU games 
+(see section 1.2 of this vignette), like e.g. computing the 
+unanimity coefficients for a given game vector
+
+### Models and questions beyond the scope of `CoopGame`
+
+Coalitional games can be turned into more realistic 
+models if, in addition one allows for partitions of the player 
+set (see e.g. the original paper by Thrall and Lucas [@thrall1963n])
+or for specifying an undirected graph connecting the players. 
+The latter case is frequently referred to as a communication 
+game (see e.g. the book by 
+Slikker and van den Nouweland [@SlikkerNouweland]). The 
+authors are currently 
+developing additional `R` packages for both games 
+with partitions 
+of the player set as well as communication games. These 
+additional software packages will make use of `CoopGame`, 
+but `CoopGame` itself will allow for neither partitions or 
+communication structures. 
+
+Since `CoopGame` can neither handle partitions nor 
+other more general coalition structures (see e.g. the 
+paper by Aumann and Dreze [@aumann1974cooperative] from 1974), the 
+package neither provides methods for computing 
+bargaining sets (see e.g. the original paper by 
+Aumann and Maschler [@aumann1964bargaining] from 1964) nor
+methods for computing the 
+kernel (see e.g. the original article by Aumann, Peleg and 
+Rabinowitz [@aumann1965method] from 1965). 
+
+Another feature this first release of `CoopGame` 
+also lacks is functionality for general market 
+games (see e.g. the original paper by Aumann [@aumann1964markets] 
+on markets with a continuum of traders from 1964).
+
+Also, NTU games, i.e. cooperative games with non-transferable 
+utility (see e.g. the article by Aumann and 
+Maschler [@AumannMaschlerNTU] from 1960), 
+are beyond the scope of 
+this `R` package.
+
+### This is not a book on cooperative game theory and these are not lecture notes 
+
+This text is a CRAN vignette only and it is supposed to 
+give users of `CoopGame` a concise overview of the 
+package. Users looking for an introduction to the 
+fascinating field of cooperative game theory will be 
+disappointed by this text. We strictly adhere to the CRAN 
+policy that CRAN vignettes are not to be misused as 
+lecture notes. 
+
+For excellent introductions to cooperative 
+game theory we refer to the books by 
+Peleg and Sudhölter [@PelegSudhoelter], 
+by Driessen [@DriessenBook], 
+by Branzei, Dimitrov and Tijs [@BranzeiBook], 
+by Chakravarty, Mitra and Sarkar [@ChakravartyMitraSarkar] 
+and by Gilles [@GillesBook].
+
+Excellent introductions to cooperative game theory 
+can also be found in the game theory books 
+by Maschler, Solan and Zamir
+[@MaschlerSolanZamir], by Peters [@PetersBook]
+by Osborne and Rubinstein [@OsborneRubinsteinBook], 
+the recent book by Narahari [@NarahariBook] and the 
+classic textbook by Straffin [@StraffinBook].
+
+We finally wish to acknowledge that beyond the aforementioned 
+excellent books 
+the development of 
+`CoopGame` also benefitted greatly from two 
+excellent German textbooks, i.e. the books by 
+Wiese [@wiese2005kooperative] and by 
+Holler and Illing [@HollerIlling].
+
+
+## Some general functionality for cooperative games 
+
+In this section we introduce some useful functionality 
+for cooperative games which we will use later when we 
+discuss games with special structure, game properties as well as 
+set-valued and point-valued solution concepts for cooperative 
+games.
+
+### Zero-normalized and zero-one-normalized games
+
+We call a cooperative game $v$ **zero-normalized** if 
+$$ v_{i} = 0 \quad \textrm{for} \quad i=1, \dots , n, $$
+i.e. the values of all singleton coalitions are zero 
+(see e.g. Peleg and Sudhölter [@PelegSudhoelter], p. 11).
+
+We can easily zero-normalize a given game vector $v$ into a 
+corresponding zero-normalized game vector $w$ via 
+$$ w (C) = v(C) - \sum_{i \in C} v_{i} $$
+for every coalition $C \in \mathcal{P}(N)$ 
+(see e.g. Branzei, 
+Dimitrov and Tijs [@BranzeiBook], p. 9).
+In `CoopGame` we provide a corresponding 
+function `getZeroNormalizedGameVector`:
+```{r, collapse=TRUE}
+library(CoopGame)
+v <- c(30,40,50,90,100,110,180)
+(w <- getZeroNormalizedGameVector(v))
+```
+
+We call a cooperative game $v$ **zero-one-normalized** if 
+it is zero-normalized and for the grand coalition $N$ there 
+holds $v(N) = 1$. 
+We can easily zero-one-normalize a given game vector $v$ by 
+dividing the zero-normalized game vector $w$ by the value 
+of the grand coalition $v(N)$.
+In `CoopGame` we provide a corresponding 
+function `getZeroOneNormalizedGameVector`:
+```{r, collapse=TRUE}
+library(CoopGame)
+v <- c(30,40,50,90,100,110,180)
+(w01 <- getZeroOneNormalizedGameVector(v))
+```
+
+For a detailed discussion on the importance 
+of zero-one-normalized 
+games and strategic equivalence we refer the reader to 
+the book by Maschler, 
+Solan and Zamir [@MaschlerSolanZamir], p. 670.
+
+### Why bit matrices are helpful in cooperative game theory
+
+We introduce the concept of a bit matrix as we find it 
+extremely useful for working with cooperative games. 
+Bit matrices unambigously map the values of coalitions 
+to the players in that coalition. We again make use of 
+the Maschler game for our example.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+(Maschler <- c(0,0,0,60,60,60,72))
+createBitMatrix(n=3,Maschler)
+```
+
+For a TU game with $n$ players the function `createBitMatrix` 
+creates a bit matrix with $n+1$ columns and 
+$2^n-1$ rows which contains all possible 
+coalitions of the players (apart from the null coalition).
+Each player is represented by a column which states 
+if this player is participating in a coalition (value $1$) 
+or not (value $0$). The last 
+column (named `cVal`) contains 
+the values of each coalition. Accordingly, each row of the 
+bit matrix expresses a coalition as a subset of all players.
+
+However, we need to admit that our usage of bit 
+matrices in `CoopGame` also consumes plenty of storage space. 
+
+### Marginal contributions
+
+Let our TU game be specified by its characteristic function $v$.
+Then for every player $j \in N$ and for every coalition 
+$C \in \mathcal{P}(N)$ with $j \in C$ we can define the 
+so-called **marginal contribution** of player $j$ to coalition $C$ 
+as
+$$ v(C) - v(C \backslash \{ j \}), $$
+see e.g. the book by Branzei, Dimitrov and Tijs [@BranzeiBook], pp. 6, 
+or the book by Peters [@PetersBook], pp. 156. 
+For some point- and set-valued solution concepts we need to 
+know the marginal contributions of every player for every 
+permutation of the set of players.
+Our function `getMarginalContributions` provides the user 
+with a list of all combinations, i.e. permutations of 
+the players, used and 
+a corresponding matrix of marginal contributions:
+```{r, collapse=TRUE}
+library(CoopGame)
+v <- c(3,4,5,9,10,11,18)
+(MC <- getMarginalContributions(v))
+# Look at all the permutations computed
+MC$combinations
+# Look at the matrix of marginal values 
+# corresponding to these permutations
+MC$marginal_values
+```
+It appears worthwhile to interpret the second line of 
+the marginal values we just computed 
+```{r, collapse=TRUE}
+MC$marginal_values[2,]
+```
+along the lines of the book by Peters [@PetersBook], pp. 156.
+The above results corresponds to the permutation $(1,3,2)$. 
+
+- Player $1$ enters first and contributes $3$. 
+- Player $3$ enters second and contributes $11-3=8$. 
+- Player $2$ enters last and contributes $18-11=7$. 
+
+### The dual game 
+Let our TU game be specified by its characteristic function $v$.
+Then we can specify the so-called **dual game** $v^{*}$ 
+corresponding to $v$ via 
+$$ v^{*} (C) = v(N) - v(N \backslash C) $$
+for every coalition $C \in \mathcal{P}(N)$ (see 
+e.g. the book by Peleg and Sudhölter [@PelegSudhoelter], p. 125, 
+or the book by Branzei, Dimitrov and Tijs [@BranzeiBook], p.7, 
+for more details). 
+The package `CoopGame` provides a function `getDualGameVector`:
+```{r, collapse=TRUE}
+library(CoopGame)
+v <- c(3,4,5,9,10,11,18)
+# Compute dual game vector
+(vStar <- getDualGameVector(v))
+```
+
+### The utopia payoff vector 
+In cooperative game theory the so-called 
+**utopia payoff** of player $j$ is defined as 
+$$ M_{j} = v(N) - v(N \backslash \{ j \}) \quad \textrm{for} \quad j=1, \dots , n,$$
+i.e. the utopia payoff $M_{j}$ is the 
+marginal contribution of player $j$ to the grand 
+coalition $N$ (see e.g. the book by 
+Branzei, Dimitrov and Tijs [@BranzeiBook], p. 20). 
+The package `CoopGame` provides a function 
+`getUtopiaPayoff` for computing a vector of 
+utopia payoffs for all players:
+```{r, collapse=TRUE}
+library(CoopGame)
+v <- c(3,4,5,9,10,11,18)
+# Compute utopia payoff vector for specified game v
+(M <- getUtopiaPayoff(v))
+```
+It is clear that player $j$ can not ask for more 
+than $M_{j}$ in the grand coalition.
+The utopia payoff vector 
+will lateron play a role in defining game properties 
+as well as point- and set-valued solution concepts. 
+
+### The minimal rights vector 
+The so-called remainder $R(C, j)$
+of player $j$ in coalition $C \in \mathcal{P}(N)$ is 
+the amount which remains for player $j$ if the 
+coalition $C$ forms and the rest of the players in 
+coalition $C$ all obtain their 
+individual utopia payoffs, i.e.
+$$ R(C,j) = v(C) - \sum_{k \in C, k \neq j} M_{k}. $$ 
+We can define a vector of **minimal rights** with components 
+$$ m_{j} = \max_{C: j \in C} R(C,j),  \quad \textrm{for} 
+\quad j=1, \dots , n,$$
+since player $j$ has a justification to demand at 
+least $m_{j}$ in the grand coalition, 
+see e.g. the book by 
+Branzei, Dimitrov and Tijs [@BranzeiBook], p. 20.  
+The package `CoopGame` provides a function 
+`getMinimalRights` for computing a vector of 
+minimal rights for every player:
+```{r, collapse=TRUE}
+library(CoopGame)
+v <- c(2,3,4,8,9,10,13)
+# Compute minimal rights vector for specified game v
+(m <- getMinimalRights(v))
+```
+
+### The excess coefficients
+
+The excess $e(C,x)$ of a coalition $C$ with respect to a vector 
+$x$ measures the gain or loss of the members of $C$ in case they 
+decide to abandon the grand coalition $N$ in favour of their 
+own coalition $C$, see e.g. the book by 
+Driessen [@DriessenBook], p. 12:
+
+$$ e(C,x) = v(C) - \sum_{j \in C} x_{j} = v(C) - x(C)$$ 
+In the above formula we use the 
+shorthand notation $x(C) =  \sum_{j \in C} x_{j}$.
+
+The package `CoopGame` provides a function 
+`getExcessCoefficients` for computing a vector of 
+excess coefficients for every coalition:
+```{r, collapse=TRUE}
+library(CoopGame)
+A <-c(3,4,5,9,10,11,18)
+x <-c(5,6,7)
+# Compute vector of excess coefficients for specified game v
+(ec <- getExcessCoefficients(A,x))
+```
+Note that the last component of a vector of excess coefficients 
+is always $0$ as long as $x$ is efficient, i.e. 
+$\sum_{j \in C} x_{j} = v(N)$.
+
+The concept of excesses is important in various 
+solution concepts, like e.g. the 
+nucleolus (see e.g. the original paper 
+by Schmeidler [@schmeidler1969nucleolus] which appeared in 1969). 
+Computing a vector of excesses comes in handy for checking 
+the correctness of nucleolus or prenucleolus computations, 
+see the article by Guajardo and 
+Jörnsten [@CommonMistakesNucleolus].
+
+### The gap function
+The gap function is the additive inverse of the vector of 
+excesses with respect to the utopia payoff vector, see the 
+book by Driessen [@DriessenBook], p. 57, for more details. 
+
+The package `CoopGame` provides a function 
+`getGapFunctionCoefficients` for computing the vector of 
+gap function coefficients for every coalition:
+```{r, collapse=TRUE}
+library(CoopGame)
+A <-c(3,4,5,9,10,11,18)
+# Compute vector of gap function coefficients for specified game v
+(gap <- getGapFunctionCoefficients(A))
+```
+
+
+### The per capita excess coefficients
+Per capita excess coefficients replace excess coefficients 
+in the computation of the 
+per capita 
+nucleolus (see the original paper by Young [@Young1985]).
+The function 
+`getPerCapitaExcessCoefficients` computes a vector of 
+per capita excess coefficients for every coalition 
+and a vector $x$, 
+i.e. the excess coefficients are divided by the number 
+of players in each coalition:
+```{r, collapse=TRUE}
+library(CoopGame)
+A <-c(3,4,5,9,10,11,18)
+x <-c(5,6,7)
+# Compute vector of per capita excess coefficients for specified game v
+(ecpc <- getPerCapitaExcessCoefficients(A,x))
+```
+
+Computing a vector of per capita excess coefficients 
+comes in handy for checking 
+the correctness of computations
+of the per capita nucleolus, see [@CommonMistakesNucleolus].
+
+### Propensities to disrupt
+For a cooperative game $v$ and a payoff 
+vector $x$ with $\sum_{j=1}^{n} x_{j} = v(N)$
+player $i$'s propensity to disrupt (see 
+e.g. the article by Littlechild 
+and Vaidya [@LittlechildVaidya]) is defined as  
+$$
+d(i,x) = \frac{\sum_{j=1,j \neq i}^{n} x_{j} - v(N \backslash \{ i \})}{x_{i} - v_{i}}
+$$
+The above expression quantifies the disruption caused 
+if player $i$ breaks away from the grand coalition.
+Within this expression the 
+denominator stands for the loss incurred by 
+player $i$ for breaking away from the grand coalition, 
+whereas the numerator stands for the joint loss of the 
+rest of the players due to the breakup caused by player $i$.
+This concept is important in solution concepts like the 
+Gately point (see e.g. the original paper by 
+Gately [@GatelyPaper] from 1974, the paper by 
+Littlechild and Vaidya [@LittlechildVaidya] or the 
+recent article [@StaudacherAnwander] by the authors) and 
+the disruption nucleolus (see [@LittlechildVaidya]). 
+
+The function 
+`getVectorOfPropensitiesToDisrupt` computes a vector of 
+propensities to disrupt for every coalition 
+and a vector $x$:
+```{r, collapse=TRUE}
+library(CoopGame)
+A <-c(3,4,5,9,10,11,18)
+x <-c(5,6,7)
+# Compute vector of propensities to disrupt for specified game v
+(propVec <- getVectorOfPropensitiesToDisrupt(A,x))
+```
+Note that the last component of a vector of propensities 
+to disrupt 
+is always set to $0$.
+Computing a vector of coefficients 
+of propensities to disrupt 
+comes in handy for checking 
+the correctness of computations
+of the disruption nucleolus, see [@CommonMistakesNucleolus].
+
+### The equal propensity to disrupt 
+`CoopGame` also provides a function for computing the 
+so-called equal propensity to disrupt. 
+This concept originates from 
+the paper [@GatelyPaper] by Gately for 
+three-person games and was generalized to $n$-person games 
+by Littlechild and 
+Vaidya (see [@LittlechildVaidya], p. 152). The 
+goal is to find an imputation $x$ 
+with minimal propensity to disrupt. 
+It can be shown that this minimal propensity to 
+disrupt can be found 
+by equating the propensity to disrupt over all players, i.e.
+$$ d(i,x) = d^{*} \quad \textrm{for} \quad i=1, \dots , n.$$
+As pointed out by 
+Littlechild and Vaidya (see [@LittlechildVaidya], p. 153) using 
+the above approach one can easily 
+find the following closed-form expression 
+$$d^{*} = \frac{(n-1) v(N) - \sum_{j=1}^{n} v(N \backslash \{ j \})}{v(N) - \sum_{j=1}^{n} v_{j}} = \frac{\sum_{j=1}^{n} M_{j} - v(N)}{v(N) - \sum_{j=1}^{n} v_{j}}$$
+for the equal propensity to disrupt $d^{*}$ of 
+a TU game with $n$ players. Our recent paper 
+[@StaudacherAnwander] provides some insight and interpretation 
+for the cases $d^{*} = 0$ and $d^{*} < 0$.
+
+
+### Minimum winning coalitions and real gaining coalitions
+In a simple game $v$ we call a player $j$ critical for 
+a coalition $C$ if the departure of player $j$ turns 
+$C$ from a winning coalition into a losing coalition, 
+i.e. $v(C)=1$ and $v(C \backslash j)=0$.
+A minimum winning coalition in a simple game is a coalition 
+where every member of the coalition is critical, see e.g. 
+the paper by Deegan and Packel [@DeeganPackel], 
+the paper by Holler [@Holler1982] or 
+the article by Bertini [@bertini2011minimal].
+The function `getMinimumWinningCoalitions` 
+identifies all minimal winning coalitions
+in a simple game $v$ and returns a corresponding 
+data frame. The function
+`getCriticalCoalitionsOfPlayer` 
+identifies all coalitions for which a given player 
+is critical.
+```{r, collapse=TRUE}
+library(CoopGame)
+# Define a simple game
+A <-c(0,0,0,1,1,0,1)
+# Find the minimum winning coalitions
+getMinimumWinningCoalitions(A)
+# Find the coalitions where player 2 is critical
+getCriticalCoalitionsOfPlayer(2,A)
+```
+The concept of minimum winning coalitions 
+can be generalized to general cooperative 
+games $v$ via the concept of real gaining 
+coalitions (see e.g. the original 
+paper by Holler and Li [@holler1995public] or 
+the article by Bertini and Stach [@BertiniStach2015]). 
+$C$ is called
+a real gaining coalition (RGC) iff
+for any true subset $T \subset C$ there holds $v(C)-v(T) > 0$. 
+We provide a corresponding 
+function `getRealGainingCoalitions`.
+```{r, collapse=TRUE}
+library(CoopGame)
+A <-c(0,0,0,0.8,0.9,0,0.9)
+# Find the real gaining coalitions
+getRealGainingCoalitions(A)
+```
+
+We provide corresponding functions `getWinningCoalitions` 
+and `getGainingCoalitions` for computing the winning 
+coalitions in simple games (see e.g. the 
+original paper by Bertini, Gambarelli 
+and Stach [@BertiniGambarelliStach])
+and the gaining coalitions in general 
+TU games (see e.g. the original paper 
+by Bertini and Stach [@BertiniStach2015] from 2015), 
+respectively. 
+
+### The unanimity coefficients
+The unanimity coefficients represent a 
+cooperative game in an alternative basis, 
+the so-called unanimity basis. 
+They were introduced in the seminal paper 
+by Shapley [@shapley1953value] 
+and are also called Harsanyi dividends (see also the books 
+by Peleg and Sudhölter [@PelegSudhoelter], p. 153, 
+or by Gilles [@GillesBook], pp. 15--17, for more details). 
+
+Our package provides a function `getUnanimityCoefficients`.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+# The Maschler game
+Maschler <-c(0,0,0,60,60,60,72)
+# Find the unanimity coefficients for the Maschler game
+(unCoeff <- getUnanimityCoefficients(Maschler))
+```
+
+### The k-cover
+
+In [@DriessenBook], p. 173, Driessen defines an associated cover 
+$v_{k}$ that majorizes the original game $v$ for a given integer $k$.
+$$
+v_{k}(C) = \left\{
+\begin{array}{rl}
+v(C) & \quad \text{if } \quad \vert C \vert < k,\\
+v(N) - \sum_{j \in N \backslash C} M_{j} & \quad \text{else,}
+\end{array} \right. 
+$$
+with $M$ denoting the utopia payoff vector. 
+In case the gap function $g$ of original game $v$ satisfies 
+$$0 \leq g(N) \leq g(C)$$
+for all coalitions $C \subseteq N$ with $k$ or more elements,
+then $v_{k}$ is called 
+the k-cover of the game $v$. In `CoopGame` 
+we provide a function 
+`getkCover` computing $v_{k}$ according to 
+the previous formula. 
+In case $v$ does satisfy the above condition, `getkCover` 
+will return `NULL`. 
+
+```{r, collapse=TRUE}
+library(CoopGame)
+# Example from book by T. Driessen, p. 75
+A=c(0,0,0,9,9,15,18)
+# Compute 1-cover of this 1-convex game
+(A1 <- getkCover(A,k=1))
+```
+
+## Cooperative game theory in the `R` Ecosystem
+There already exist two small `R` packages offering 
+functionality for 
+cooperative game theory on CRAN, i.e. 
+`GameTheoryAllocation` [@GameTheoryAllocation] and 
+`GameTheory` [@cano2017enjoying]. Both 
+packages are very limited in scope, e.g. according 
+to its documentation [@cano2017enjoying] the package 
+`GameTheory` only computes the nucleolus for a maximum 
+of four players. However, `GameTheory` provides some 
+very nice insight into conflicting claims problems 
+and is also employed in the `R` 
+package `coopProductGame` [@coopProductGame] 
+for computing linear production 
+games (see the original paper by 
+Owen [@owen1975core] from 
+1975 for more details on 
+linear production games). 
+
+Still, we found it very sensible to develop `CoopGame`. 
+Our goal was to provide a comprehensive package 
+for cooperative game theory that goes beyond providing 
+routines for the Shapley value or the nucleolus. 
+One of our goals was to provide reference implementations 
+for lesser-known and lesser-used solution concepts.
+Another was to be able to visualize solution concepts 
+in the case of three or four players.
+
+## A few general remarks on `CoopGame`
+
+We wish to end this first chapter of our vignette with 
+four general remarks on `CoopGame`.
+
+### Package maintainer 
+
+This is supposed to be the second `R` package on CRAN 
+maintained by the first author after the publication 
+of the significantly smaller package `EvolutionaryGames` 
+[@EvolutionaryGames] in November 2017. Please feel free 
+to email questions regarding `CoopGame` to 
+`jochen.staudacher@hs-kempten.de`.
+
+### No formal maximum number of players
+`CoopGame` does not enforce a maximum number of players. 
+Still, realistically for most concepts provided in 
+`CoopGame` users should limit their studies to 
+at most $20$ players if they expect quick answers 
+on modern computers. The authors have employed `CoopGame` for 
+up to $n=24$ players, but `R` normally ran out of storage 
+for $n>24$.
+
+### Minimum: 2 Players
+In `CoopGame` a minimum of two players is needed 
+in order to define a TU game.
+
+### No null games allowed
+In case the user specifies a null game, i.e. a trivial TU game 
+with each coalition generating zero value, `CoopGame` 
+will stop with an error message.

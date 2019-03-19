@@ -1,0 +1,120 @@
+---
+title: "FutureDevelopments"
+author: "Jochen Staudacher"
+date: "6 March 2019"
+output: pdf_document
+---
+
+# Outlook to Future Developments and Acknowledgements
+
+## Future developments and ideas for software for cooperative games
+As previously mentioned the package `CoopGame` does not 
+allow for partitions of the player set or for 
+communication structures (see e.g. the 
+book by Slikker and van den Nouweland [@SlikkerNouweland]).
+The authors of this vignette are about to finish to 
+smaller R packages by the names of `PartitionGames` and 
+`CommunicationGames` for cooperative games with 
+partitions of the player set and for cooperative 
+games on undirected graphs, respectively. 
+
+Cooperative games on directed networks might be 
+the subject of a future R package. 
+In this context we refer to the articles by 
+Gilles, Owen and van den Brink [@gilles1992games] 
+and by Gilles and van den Brink [@van1996axiomatizations] 
+on permission structures as well as to the 
+article by Gilles and van den Brink on measuring 
+domination in directed networks [@van2000measuring].
+Chapters 5 and 6 of the book by Gilles [@GillesBook]
+provide an excellent insight into this exciting field.
+
+Cooperative games on multigraphs offer another 
+of many possible lines of future investigations, 
+see e.g. the article by Forlicz, Mercik, 
+Stach and Ramsey [@forlicz2018shapley].
+
+Currently, the authors could think of various other 
+ideas for software connected to the field of cooperative 
+game theory beyond coalition structures, graphs or 
+multigraphs. We already mentioned that `CoopGame` is far 
+from efficient for computing power indices. A software 
+package for efficient and truly powerful computation 
+of power indices could be a possible project for the future. 
+In this context, the idea of generating functions 
+appears to be of paramount importance, see e.g. the 
+article by 
+Bilbao, Fernandez, Jimenez Losada and 
+Lopez [@bilbao2000generating] and the article by 
+Alonso-Meijide and Bowles [@alonso2005generating].
+
+Cooperative games in a continuous setting are very 
+intriguing. We mention the work by Aumann and 
+Shapley on values of non-atomic games [@aumann2015values], 
+Owen's multilinear extensions of 
+cooperative games [@owen1972multilinear], the 1994 paper 
+by Algaba, Bilbao, Fernandez and Jimenez on 
+the Lovasz extension (see the article 
+by Lovasz [@lovasz1983submodular] from 1983) of
+market games [@algaba2004lovasz] 
+and Neyman's work on values of games with 
+infinitely many players [@neyman2002values] as 
+exemplary representatives of this exciting field. 
+A publicly available software package for cooperative 
+game theory in a continuous setting combining both 
+symbolic and numeric computation appears both 
+challenging and attractive. 
+
+## Acknowledgements
+
+The R package `CoopGame` started as a software project 
+in the Computer Science M.Sc. program at Kempten University 
+in March 2015 under the supervision of the first author 
+of this vignette. Anna Merkle, Fatma Tokay and Kübra Tokay 
+got the ball rolling with their remarkable efforts. 
+In a subsequent project Alexandra Tiukkel, Michael März and 
+Johannes Anwander, the second 
+author of this vignette, made excellent progress.
+Later, Daniel Gebele, Franz Müller and Nicole Cyl contributed 
+to `CoopGame` as parts of their B.Sc. theses. 
+In his M.Sc. thesis [@AnwanderMaster] Johannes Anwander moved 
+`CoopGame` significantly closer to the shape of its 
+first release on CRAN. So this is also the place for the 
+first author to express his deep gratitude to his coauthor 
+for all his assistance in making `CoopGame` available to 
+the general public via CRAN. 
+
+The wonderful conference SING14, 14th European Meeting 
+on Game Theory 2018, in Bayreuth in July 2018 provided the 
+first author with a very first opportunity to present 
+small parts of 
+an unfinished version of `CoopGame` to fellow researchers 
+and colleagues in the field of cooperative game theory. 
+The package `CoopGame` benefited from detailed discussions 
+with Izabella Stach (AGH Krakau), 
+Gianfranco Gambarelli (University of Bergamo) and 
+Tamás Solymosi (Corvinus University Budapest) during that 
+conference.
+Tamás also suggested the term weakly constant-sum game and 
+provided the first author with a copy of the famous 1967 
+technical report by Kopelowitz [@kopelowitz1967computation] on 
+computing the nucleolus. 
+This is also the place to thank a large number of 
+other colleagues, 
+too numerous to name them all, 
+for expressing their interest in `CoopGame` and for 
+making suggestions during that conference.
+Finally, this is also the opportunity to apologize 
+to any colleagues 
+in the field who might 
+have been waiting for the release 
+of `CoopGame` since July 2018. The process of getting the 
+final details right took overly long.
+
+The final thanks of the first author go to his Kempten colleague
+Stefan Rieck in the Faculty of Computer Science for 
+having hosted `CoopGame` on his Open Project Server 
+for four years and, in particular, for having provided 
+a subversion server for `CoopGame` until its ultimate 
+release on CRAN.
+

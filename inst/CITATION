@@ -1,0 +1,16 @@
+citHeader("To cite CoopGame in publications use:")
+
+
+citEntry(
+ entry="Manual",
+ title= "Using the R package CoopGame for the analysis, solution and visualization of cooperative games with transferable utility",
+ note = "{R} Vignette",
+ url = "https://cran.r-project.org/package=CoopGame",
+ year="2019",
+ author = personList(as.person("J. Staudacher"),as.person("J. Anwander")),
+ textVersion="Staudacher, J., and Anwander, J. (2019). Using the R package CoopGame for the analysis, solution and visualization of cooperative games with transferable utility; {R} Vignette; 2019 .")
+
+
+
+citFooter("We have invested a lot of time and effort in creating the package CoopGame and its vignette,",
+          "please cite it when using it in research or teaching.")

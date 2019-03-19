@@ -1,0 +1,214 @@
+---
+title: "SetSolutionConcepts"
+author: "Jochen Staudacher"
+date: "6 March 2019"
+output: pdf_document
+---
+
+# Set Solution Concepts and Allocation Properties
+
+The package `CoopGame` provides the following five set-based
+solution concepts:
+
+* the imputation set 
+* the core
+* the core cover
+* the reasonable set
+* the Weber Set
+
+For all five set-based solution concepts we provide
+
+* a routine for computing the vertices of the corresponding set
+for an arbitrary number $n \geq 2$ of players
+* a routine for checking whether an allocation $x$ is
+part of the corresponding set
+* a routine for drawing the corresponding set for $3$ or
+$4$ players (see chapter 6 of this vignette)
+
+Note that both for checking whether an allocation $x$
+belongs to a set solution concept or not and for drawing 
+the set solution (in the case of $3$ or $4$ players)
+the corresponding vertices are internally
+always computed first.
+
+## Available set solution concepts
+
+### The imputation set
+Given a TU game $v$ with $n$ players we call a vector 
+$x \in \mathbb{R}^{n}$ **efficient** if 
+$$ \sum_{i=1}^{n} x_{i} = v(N).$$
+Frequently the set of efficient vectors is also called 
+the set of preimputations, see e.g. the 
+book by Peleg and Sudhölter [@PelegSudhoelter], p. 20.
+In case $x \in \mathbb{R}^{n}$ is also **individually rational**
+(from the point of view of every player $i$), i.e.
+$$ v(\{i\}) \leq x_{i}$$
+for all $i=1, \dots, n$, then we call $x$ an imputation.
+Formally, we can specify the so-called imputation set $I(v)$ as
+$$I(v)= \{ x \in \mathbb{R}^{n} \vert \sum_{i=1}^{n} x_{i} = v(N)
+\land v(\{i\}) \leq x_{i} \}$$
+According to our game property definitions from section 3 the
+imputation set is empty unless $v$ is either essential or
+degenerate. In the latter case $I(v)$ consists of a single point.
+For further details on imputations see e.g. the book by 
+Peleg and Sudhölter 
+[@PelegSudhoelter], p.20, 
+the book by Maschler, Solan and Zamir 
+[@MaschlerSolanZamir], p. 674--677,
+or the book by 
+Osborne and Rubinstein [@OsborneRubinsteinBook], p. 278.  
+
+In order to computate the vertices of the imputation set
+we provide the function `imputationsetVertices`. The rows
+of the matrix returned are the vertices of the imputation set.
+In case the imputation set is empty an empty matrix is returned.
+In order
+to check whether an allocation $x$ is an imputation there
+is the function `belongsToImputationset`.
+```{r, collapse=TRUE}
+library(CoopGame)
+v <-c(0,0,0,1,1,0,1)
+imputationsetVertices(v)
+belongsToImputationset(c(0.7,0.3,0),v)
+```
+
+### The core 
+Apart from the set of imputations the most prominent set
+solution concept is the **core**. The concept was established in
+the Ph.D. thesis by Gillies [@GilliesThesis] from 1953 and a 
+seminal article by Aumann [@aumann1961core] from 1961. 
+The idea of the core is to consider only those imputations $x$
+which are also **coalitionally rational**, i.e.
+$$ v(S) \leq \sum_{i \in S} x_{i}$$
+for all nonempty coalitions $S \subseteq N$. More 
+information on the core can e.g. be found in  
+the book by Maschler, Solan and Zamir 
+[@MaschlerSolanZamir], pp. 686--747,
+the book by Osborne and Rubinstein 
+[@OsborneRubinsteinBook], pp. 257--275, or 
+the book by Peleg and Sudhölter 
+[@PelegSudhoelter], pp. 27--49.
+
+The function `coreVertices` lists the vertices of the core
+as rows of a matrix.
+In case the core is empty an empty matrix is returned.
+The function `belongsToCore` checks whether an allocation $x$
+is contained in the core or not.
+```{r, collapse=TRUE}
+library(CoopGame)
+v <-c(0,0,0,1,1,0,3)
+coreVertices(v)
+belongsToCore(c(1.7,1.3,0),v)
+```
+
+### The core cover
+
+The core cover was originally suggested 
+by Tijs and Lipperts in [@tijs1982CoreCover]
+as a core catcher. 
+Given a TU game $v$ with $n$ players let $m$ denote
+the minimal rights vector and $M$ the utopia payoff vector.
+The core cover of the game $v$ consists of all
+imputations $x$ satisfying
+$$m(i) \leq x_{i} \leq M(i)$$
+for all $i=1, \dots, n$. One can show that the core is always
+a subset of the core cover, see e.g. the book by 
+Branzei, Dimitrov and Tijs [@BranzeiBook], p. 21, 
+or the book by Chakravarty, Mitra and Sarkar 
+[@ChakravartyMitraSarkar], pp. 45--46, for more details.
+Also note that the core cover is nonempty iff the game $v$
+is quasi-balanced (see chapter 3 of this vignette).
+
+We provide functions `coreCoreVertices` listing the 
+vertices of the core cover
+as rows of a matrix and 
+`belongsToCoreCover` for checking whether an allocation $x$
+is contained in the core cover or not.
+
+### The reasonable set
+
+The reasonable set was originally 
+suggested by Milnor in [@milnor1953reasonable]
+as another core catcher. 
+The reasonable set of a TU game $v$ consists of all
+imputations $x$ satisfying
+$$v(\{i \}) \leq x_{i} \leq 
+\max_{i: i \in S} (v(S) - v(S \backslash \{i \}) $$
+for all $i=1, \dots, n$. One can show that the core
+cover is always
+a subset of the reasonable set.  
+We refer to the book by 
+Branzei, Dimitrov and Tijs [@BranzeiBook], p. 21, 
+the book by Chakravarty, Mitra 
+and Sarkar [@ChakravartyMitraSarkar], pp. 43--46, and 
+the article by 
+Gerard-Varet and Zamir [@gerard1987remarks] 
+for more details 
+concerning the reasonable set.
+
+We provide functions `reasonableSetVertices` listing the 
+vertices of the reasonable set
+as rows of a matrix and 
+`belongsToReasonableSet` for checking whether 
+an allocation $x$
+is contained in the reasonable set or not.
+
+### The Weber Set
+
+The Weber Set was originally 
+suggested by Weber in [@Weber1988]
+as another core catcher. 
+The Weber Set is the convex hull of
+the marginal vectors. 
+Thus one can easily see that the Weber Set
+is contained in the imputation set for
+superadditive games.
+We provide the Weber Set only for game vectors $v$
+which are both nonnegative and monotonic.
+One can show that the core is always
+a subset of the Weber Set. We refer to the 
+book by Peters [@PetersBook], chapter 18, 
+for further details 
+regarding the Weber Set.
+
+We provide functions `weberSetVertices` listing the 
+vertices of the Weber Set
+as rows of a matrix and 
+`belongsToWeberSet` for checking whether 
+an allocation $x$
+is contained in the Weber Set or not.
+
+## Using `rcdd` for computations
+
+All five set-based solution concepts yield convex polyhedra 
+as results. 
+We wish to stress that we never coded any vertex computations
+ourselves, but relied on the available R packages
+`rcdd` [@rcdd] and `geometry` [@geometry]. 
+We wish to give particular praise to the library `cdd` for 
+polyhedral computations 
+by Komei Fukuda [@cddFukuda]. In turn, 
+the availability of a package like 
+`rcdd` [@rcdd] 
+as an R-interface of the powerful library `cdd` underlines 
+the power of the `R` ecosystem.
+
+The imputation set, the core, the core cover
+and the reasonable set are 
+by their definitions implicitly specified
+as so-called H-representations, i.e. 
+intersections of halfspaces, of convex polyhedra. 
+Computing the so-called V-representations, i.e. 
+representing the polyhedron as the convex hull
+of its vertices, is done via the package `rcdd`.
+The Weber set is already defined as the convex
+hull of the marginal vectors. Hence we only
+need to use `rcdd` to remove any redundant
+points from a list of potential 
+Weber set vertices. This feature of removing redundant
+points is also used to determine whether a
+given allocation $x$ belongs to one of the 
+five set solution concepts in question or not.
+For further information on convex polyhedra we simply
+refer to the books by Rockafellar [@rockafellar2015convex]
+and Ziegler [@ziegler2012lectures].

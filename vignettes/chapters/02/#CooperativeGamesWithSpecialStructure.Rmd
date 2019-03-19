@@ -1,0 +1,473 @@
+---
+title: "CooperativeGamesWithSpecialStructure"
+author: "Jochen Staudacher"
+date: "6 March 2019"
+output: pdf_document
+---
+
+# Cooperative Games with Special Structure
+
+For the convenience of the users we provide the possibility 
+to generate special families of games. Our approach is 
+to generate the game function as a list. 
+The corresponding 
+game vector can either be generated directly or 
+extracted as the corresponding element of the list. Still, 
+for each special family of cooperative 
+game there is 
+
+* a function for the game object (as a list)
+* a function for the corresponding game vector and
+* a function for the value of a coalition specified by the user.
+
+This chapter 
+gives an overview of the special families of games available 
+in `CoopGame` and their usage.
+
+## Bankruptcy games 
+
+Bankruptcy games are studied frequently 
+in game cooperative game theory, see e.g. 
+the book by Gura and Maschler [@GuraMaschlerBook], the 
+seminal paper by Aumann 
+and Maschler [@AumannMaschler1985] from 
+1985, the article by Aumann [@Aumann2002] 
+from 2002 or the original paper 
+by O'Neill [@ONeill1982problem] on a 
+problem of rights arbitration from the Talmud from 1982.
+
+Imagine a person dies leaving debts $d_{1}, \dots, d_{n}$ 
+to $n$ creditors. However, the sum $\sum_{i=1}^{n} d_{i}$ 
+of the debts is greater than the value of the estate $E$ 
+of the deceased. Now we face the 
+problem that the debts are mutually inconsistent as
+the estate is too small in order to meet all of the debts of 
+the $n$ creditors.
+The game theoretic approach to bankruptcy problems 
+started in 1982 with the article by O'Neill [@ONeill1982problem] 
+where O'Neill defines a TU game $v$ for a 
+set of creditors $N = \{ 1, \dots , n\}$, 
+a debt vector $d$ of lenght $n$ and an estate $E$ as 
+
+$$ v(C) = \max (0, E - \sum_{i \in N \backslash C} d_{i}) $$
+for any coalition $C$ of creditors.
+
+`CoopGame` provides the function `bankruptcyGame`. 
+It creates a list containing all information about 
+a bankruptcy game specified by the user, i.e. the 
+list contains the number of players $n$, 
+the vector of claims $d$, the estate $E$, 
+plus the bankruptcy game vector $v$. 
+Employing the function `bankruptcyGameVector` users 
+can alternatively generate the corresponding game vector 
+directly specifying the number $n$ of players,
+the value of the estate $E$ and a vector of claims 
+$d$ of length $n$. `CoopGame` will check whether 
+the specification of the bankruptcy game is consistent 
+in the sense that $E \leq \sum_{i \in N} d_{i}$.
+
+We look into the usage of `bankruptcyGame` 
+and `bankruptcyGameVector` by 
+studying an important 
+example from the Babylonian Talmud frequently 
+employed in the game theory literature.
+
+### A problem from the Babylonian Talmud
+This important example from the Babylonian Talmud 
+deals with a man who married three women. In their marriage
+contracts the three women were promised 
+the sums of 100, 200 and 300 units of money after 
+the death of their husband. 
+The man dies and his estate amounts to
+less than 600 units. In the following we will not study 
+this important example in more detail, but simply focus 
+on an estate $E$ worth 300 units of money.
+
+`CoopGame` allows us to create the corresponding 
+bankruptcy game.
+
+```{r, collapse=TRUE,eval=FALSE}
+library(CoopGame)
+bankruptcyGame(n=3,d=c(100,200,300),E=300)
+## $n
+## [1] 3
+##
+## $d
+## [1] 100 200 300
+##
+## $E
+## [1] 300
+##
+## $v
+## [1]   0   0   0   0 100 200 300
+```
+
+As stated we provide the user with various ways to extract 
+the corresponding game vector. One is to use 
+`bankruptcyGameVector`, another to access the 
+element `$v` from the `bankruptcyGame` object.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+# First approach
+bankruptcyGameVector(n=3,d=c(100,200,300),E=300)
+#
+# Alternative approach
+bankruptcyGame(n=3,d=c(100,200,300),E=300)$v
+```
+
+In addition, the user can also compute the value of 
+any individual coalition using the function 
+`bankruptcyGameValue`. For example, let us extract 
+the value of the coalition of the second and third widow:
+
+```{r, collapse=TRUE}
+library(CoopGame)
+bankruptcyGameValue(S=c(2,3),d=c(100,200,300),E=300)
+```
+
+We will briefly revisit bankruptcy games in 
+section 5.3.2 of this vignette.
+For more information on bankruptcy games and 
+the contested-garment 
+principle (as well as it physical 
+interpretation via hydraulic rationing) we refer 
+the reader to the book by
+Gura and Maschler [@GuraMaschlerBook], 
+the paper by Aumann and 
+Maschler [@AumannMaschler1985] from 1985, 
+the paper by Aumann [@Aumann2002] from 2002 
+and the original paper by O'Neill [@ONeill1982problem] from 1982.
+
+## Cost allocation games
+We can look at cost allocation games in characteristic 
+function form consisting of the 
+set $N =\{ 1, \dots , n \}$ of agents 
+(or purposes, projects or services) and the characteristic
+function $c:\mathcal{P}(N) \to \mathbb{R}$ 
+with $c (\emptyset) = 0$.
+We are introducing the shorthand notation 
+$$ c_{i} = c(\{ i \}) \quad \textrm{for} \quad i=1, \dots , n, $$
+for the costs of single agents.
+The connection between cost games and TU games is given by the 
+associated savings 
+game $v$ for $N =\{ 1, \dots , n \}$ defined by 
+$$v(C) = \sum_{i \in C} c_{i} - c(C)$$
+for every coalition $C$. 
+Note that the associated savings game $v$ is automatically 
+$0$-normalized. 
+For more information on cost games 
+see e.g. the article by Otten [@Otten], 
+the article by Young [@YoungCostAllocation],
+the overview paper by Parrachino, Zara and 
+Patrone [@ParrachinoZaraPatrone], the 
+paper by Tijs and Driessen [@TijsDriessen] and 
+the paper by Straffin and Heaney [@StraffinHeaney].
+
+`CoopGame` will perform computations on the corresponding 
+cost-savings game. Note that if $x_{i}$, $i=1, \dots, n$, is 
+the solution of the cost-savings game provided by 
+`CoopGame` then the actual costs for player $i$ will 
+be $y_{i} = c_{i} - x_{i}$.
+
+`CoopGame` provides the function `costSharingGame`. 
+The user needs to specify the number of players $n$ and 
+a vector of costs of length $n$.
+We look into the usage of `costSharingGame` 
+by briefly studying an important 
+example from the literature.
+
+### The TVA problem
+The TVA (Tennessee Valley Authority) problem is 
+a classic example of a cost-sharing problem. We refer to 
+the original article by Ransmeier 
+[@ransmeier1942tennessee]
+on the Tennessee Valley Authority 
+from 1942 and the book by Driessen [@DriessenBook], 
+pp. 1--3, for more details and 
+the history of this problem. 
+
+The following code example shows how to specify the 
+TVA problem in `CoopGame`:
+
+```{r, collapse=TRUE, eval=FALSE}
+library(CoopGame)
+TVACosts=c(163520,140826,250096,301607,378821,367370,412584)
+(tvaCostGame <- costSharingGame(n=3, TVACosts))
+## $n
+## [1] 3
+##
+## $Costs
+## [1] 163520 140826 250096 301607 378821 367370 412584
+##
+## $v
+## [1] 0 0 0 2739 34795 23552 141858
+# 
+# Alternatively, generate and output only the corresponding game vector
+(v <- costSharingGameVector(n=3, TVACosts))
+## [1] 0 0 0 2739 34795 23552 141858
+```
+
+
+We will revisit the TVA problem 
+in section 5.3.3 of this vignette.
+
+## Glove games
+In glove games we have a set $N = \{ 1, \dots , n\}$ 
+of $n$ players and 
+a disjoint union $N = L \cup R$. $L$ is the set of 
+players owning one left-hand glove each and $R$ is 
+the set of players owning one right-hand glove each.
+The worth of a coalition $C$ equals the number of 
+pairs of gloves that the members of $C$ can provide. 
+In short: For every coalition $C$ there holds:
+$v(C) = \min (\vert S \cap L \vert, \vert S \cap R \vert)$.
+For more details on glove games we refer to 
+the book by Peters [@PetersBook], p. 155--156.
+
+`CoopGame` provides the function `gloveGame`. 
+The user needs to specify the number of players $n$, the 
+set $L$ of players owning one left-hand glove each and the 
+set $R$ of players owning one right-hand glove each.
+
+In the following example we compute the game vector for 
+a glove game with three players and 
+players 1 and 3 owning one left-hand 
+glove each whereas player 2 owns the only right-hand glove. 
+
+```{r, collapse = TRUE}
+library(CoopGame)
+gloveGame(n=3,L=c(1,3),R=2)$v
+#
+# Equivalent alternative approach
+gloveGameVector(n=3,L=c(1,3),R=2)
+```
+
+## Cardinality games
+For a cardinality game the value of each coalition 
+is simply the number of the members of the coalition, i.e.
+$v(C) = \vert C \vert$ for every coalition $C$.
+In our opinion cardinality games make very good test cases. 
+
+`CoopGame` provides the function `cardinalityGame`. 
+The user only needs to specify the number of players $n$ 
+in the cardinality game.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+cardinalityGame(4)$v
+#
+# Equivalent alternative approach
+cardinalityGameVector(4)
+```
+
+## Weighted voting games 
+We now look into decision-making and voting in 
+committees and define a so-called weighted majority 
+game (aka quota game, aka weighted voting game) 
+for $n$ players 
+as follows. Each player $j$ is assigned a weight 
+$w_{j}$ (which in some situations we may also 
+interpret the number of votes of a group). A law 
+or motion gets passed in the committee if the 
+quota $q$ is reached or exceeded, i.e.
+
+$$ 
+v(C) = \Bigg\{  
+\begin{aligned}
+1 & \quad \textrm{if} \quad \sum_{j \in C} w_{j} \geq q \\
+0 & \quad \textrm{else.}
+\end{aligned}
+$$
+
+We refer to the book by Maschler, Solan and Zamir 
+[@MaschlerSolanZamir], pp. 825 -- 831, for more 
+details and examples.
+
+By definition weighted voting games 
+are always simple games.
+Along the lines of the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 16, 
+we call a TU game $v$ **simple** if 
+$v$ is monotonic and the values of all coalitions are 
+$0$ or $1$, see also subsection 3.2.5 of this vignette. 
+
+
+`CoopGame` provides the function `weightedVotingGame`. 
+The user needs to specify the number of players $n$, 
+a numeric vector of weights $w$ of length $n$ with the 
+weights of the individual players and the quota $q$ 
+in the weighted voting game. We provide a simple example 
+with the three players.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+weightedVotingGame(n=3, w=c(3,5,4), q=8)$v
+#
+# Equivalent alternative approach
+weightedVotingGameVector(n=3, w=c(3,5,4), q=8)
+```
+
+For a deeper analysis and a broader view on voting 
+in committees we recommended the article by 
+Peleg [@peleg2002game] from 2002.
+
+## Weighted majority games with a single veto player
+Weighted majority games with a single veto player 
+are a special case of quota games.
+We take our definition of a 
+weighted majority game with a single veto 
+player game from the book 
+by Matthew O. Jackson [@JacksonBook], p. 415. 
+The only winning coalitions are those containing the 
+veto player $i$ and at least one other player.
+
+$$ 
+v(C) = \Bigg\{  
+\begin{aligned}
+1 & \quad \textrm{if} \quad \vert C \vert \geq 2 \quad 
+\textrm{and} \quad i \in C\\
+0 & \quad \textrm{else.}
+\end{aligned}
+$$
+
+
+`CoopGame` provides the function `majoritySingleVetoGame`. 
+The user needs to specify the number of players $n$ 
+and the number of the veto player in 
+the weighted majority game.
+
+The following example produces the game vector for 
+a majority game with four players and player $2$ in 
+the role of the veto player.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+majoritySingleVetoGame(n=4, vetoPlayer=2)$v
+#
+# Equivalent alternative approach
+majoritySingleVetoGameVector(n=4, vetoPlayer=2)
+```
+
+
+## Unanimity games
+Unanimity games are a special family of simple games.
+For a unanimity game the winning coalitions are 
+exactly those coalitions 
+containing the set 
+$T \in \mathcal{P}(N)$, i.e. 
+
+$$ 
+v(C) = \Bigg\{  
+\begin{aligned}
+1 & \quad \textrm{if} \quad T \subseteq C \\
+0 & \quad \textrm{else,}
+\end{aligned}
+$$
+see Peleg and Sudhölter [@PelegSudhoelter], p. 152. 
+We can understand 
+$T$ as the powerful (or productive) lot among the players. 
+`CoopGame` provides the function `unanimityGame`. 
+The user needs to specify the number of players $n$ 
+and the set of powerful players $T$ in the 
+unanimity game.
+
+The following example produces the game vector for 
+a unanimity game with four players and $T$ consisting 
+of players $1$ and $4$.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+unanimityGame(n=4, T=c(1,4))$v
+#
+# Equivalent alternative approach 
+unanimityGameVector(n=4, T=c(1,4))
+```
+
+## Apex games
+Apex games are a special family of simple games.
+For an apex game there are 
+two types of winning coalitions: 
+The first type contains the 
+so-called apex player plus at the least one other player.
+The only winning coalition without the apex player 
+is a coalition 
+of all the other players except the apex player, see 
+in particular the book by Peters [@PetersBook], p. 164, 
+for more details on apex games. 
+`CoopGame` provides the function `apexGame`. 
+The user needs to specify the number of players $n$ 
+and the number of the apex player in the apex game.
+The following lines construct the game vector for an 
+apex game with four players and player $2$ in the role 
+of the apex player.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+apexGame(n=4, apexPlayer=2)$v
+#
+# Equivalent alternative approach 
+apexGameVector(n=4, apexPlayer=2)
+```
+
+## Dictator games
+Dictator games are a special case of unanimity games, 
+i.e. the set $T$ in the unanimity game consists of a 
+single player $i$, the dictator.
+$$ 
+v(C) = \Bigg\{  
+\begin{aligned}
+1 & \quad \textrm{if} \quad i \in  C \\
+0 & \quad \textrm{else.}
+\end{aligned}
+$$
+For more details on dictator games we refer to the 
+book by Peters [@PetersBook], p. 295, and the book by 
+Maschler, Solan and Zamir [@MaschlerSolanZamir], p. 764.
+`CoopGame` provides the function `dictatorGame`. 
+The user needs to specify the number of players $n$ 
+and the number of the dictator in the dictator game.
+The following lines generate the game vector for 
+a dictator game with four players and player $3$ in 
+the role of the dictator.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+dictatorGame(n=4, dictator=3)$v
+#
+# Equivalent alternative approach 
+dictatorGameVector(n=4, dictator=3)
+```
+
+
+## Divide-the-dollar games
+The divide-the-dollar games in `CoopGame` 
+are a special family of simple games.
+We take our definition of a 
+divide-the-dollar game from the book 
+by Matthew O. Jackson [@JacksonBook], p. 413.
+For a divide-the-dollar game with $n$ players the 
+winning coalitions are exactly 
+those coalitions containing 
+at least $n/2$ players, i.e.
+$$ 
+v(C) = \Bigg\{  
+\begin{aligned}
+1 & \quad \textrm{if} \quad \vert C \vert \geq n/2 \\
+0 & \quad \textrm{else.}
+\end{aligned}
+$$
+
+`CoopGame` provides the function `divideTheDollarGame`. 
+The user only needs to specify the number of players $n$ 
+in the divide-the-dollar game.
+We end this chapter with the game vector for 
+a divide-the-dollar game with three players.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+divideTheDollarGame(3)$v
+#
+# Equivalent alternative approach
+divideTheDollarGameVector(3)
+```

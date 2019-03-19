@@ -1,0 +1,131 @@
+---
+title: "VisualizationFor3And4PlayerGames"
+author: "Jochen Staudacher"
+date: "6 March 2019"
+output: pdf_document
+---
+
+# Visualization of Solution Concepts for Games with 3 and 4 Players
+
+The package `CoopGame` offers the possibility to 
+visualize both set valued and point valued solution 
+concepts for cooperative games with 3 or 4 players 
+using barycentric coordinates. 
+We strongly hope that 
+our visualization routines will be helpful for 
+colleagues teaching cooperative game theory and 
+wish to acknowledge that for the conversion of 
+Cartesian coordinates to barycentric coordinates 
+`CoopGame` makes use of the package `geometry` [@geometry].
+
+## An example: Generating the `CoopGame` Logo
+
+Running the following lines of `R` Code users can generate 
+the `CoopGame` Logo on the first page of this vignette. 
+It draws the reasonable set of the given game (in blue) as 
+a subset of 
+the imputation set and the core of the game (in red) as 
+a subset of the reasonable set. The modiclus is displayed 
+in black as a point in the core.
+
+```{r, collapse=TRUE, fig.show=TRUE}
+library(CoopGame)
+v0=c(6,8,10,18,20,22,31)
+drawImputationset(v0, label=FALSE)
+drawReasonableSet(v0, colour="blue", holdOn=TRUE)
+drawCore(v0, holdOn=TRUE, colour="red")
+drawModiclus(v0, holdOn=TRUE, colour="black")
+```
+
+## Some general remarks on the drawing routines in `CoopGame`
+The package `CoopGame` provides drawing routines for all 
+set solution concepts from chapter 4 for the case of 
+3 or 4 players.
+In particular, there are routines `drawImputationSet`, 
+`drawCore`, `drawCoreCover`, 
+`drawReasonableSet` and `drawWeberset`.
+Note that core, core cover, reasonable set and Weber set 
+are all visualized as parts of the imputation set. 
+Note also that the Weber set is only guaranteed to be a subset 
+of the imputation set for superadditive games 
+whereas the other three set solution 
+concepts are always subsets of the imputation set.
+Also, any efficient point solution method, i.e. any 
+point solution method for which the components of the 
+solution vector are guaranteed to add up to the value 
+of the grand coalition, come with their own drawing routines.
+
+As for the individual drawing routines users can add to 
+an existing plot by setting the parameter `holdOn` to 
+`TRUE`. The parameter `holdOn` is set to `FALSE` by 
+default and this feature should be handled with a little care 
+by the user. We strongly advise against plots with too 
+many set valued and/or point valued solutions.
+
+In addition, users can also set the `colour` of the 
+polyhedron or point they want to draw and use `name` 
+for naming an individual point. Only for the function 
+`drawImputationset` the colour is fixed to white as 
+any polyhedra or points are always displayed as 
+parts of the imputation set. 
+
+Also, only for the function 
+`drawImputationset` there is the default `label=TRUE`.
+In any plots the vertices of the imputation set are 
+by default 
+labelled by their coordinates. In other words: 
+Unless users start 
+with `drawImputationset(gameVector, label=FALSE)` 
+and then carefully add to their 
+plots with `holdOn=TRUE` the 
+points of the imputation set will by default be labelled. 
+For all four drawing 
+routines `drawCore`, `drawCoreCover`, 
+`drawReasonableSet` and `drawWeberset` the parameter 
+`label` is set to `FALSE` by default, i.e. by default 
+the coordinates of the vertices of these sets 
+are not displayed. The following code yields a 
+variant of the `CoopGame` 
+logo with the three corner points of 
+the imputation set labelled. 
+
+```{r, collapse=TRUE, fig.show=TRUE}
+library(CoopGame)
+v0=c(6,8,10,18,20,22,31)
+drawReasonableSet(v0, colour="blue")
+drawCore(v0, holdOn=TRUE, colour="red")
+drawModiclus(v0, holdOn=TRUE, colour="black")
+```
+
+Placing labels 
+in the perfect places by default is tricky 
+and users may not always be perfectly satisfied 
+with the results they obtain when plotting set solution 
+concepts with `label = TRUE`. So our advice 
+to users intending to use `CoopGame` for publication ready 
+graphics of the core, the core cover, the reasonable 
+set and/or the Weber set 
+with all points labelled by their coordinates 
+is to export the plots without these 
+labels and then postprocess the plots themselves putting 
+labels of individual points in the desired places.
+
+For drawing any point valued solution concepts `label` 
+is actived by default and a proper `name` for the point 
+valued solution is set by default.
+
+## The power of `rgl`
+
+The R package `rgl` [@rgl] offers the possibility to 
+visualize solution concepts for cooperative games with 
+4 players in three dimensions. Users are invited to 
+uncomment the following four lines of code,
+play around with the following example and rotate the 
+nice 3d-plot displayed by `rgl`.
+
+```{r, collapse=TRUE, fig.show=FALSE, eval=FALSE}
+#library(CoopGame)
+#A=c(0,0,0,0,8,8,8,8,8,8,12,12,12,12,22)
+#drawWeberset(A, colour ="grey")
+#drawCore(A, colour ="red", holdOn = TRUE)
+```

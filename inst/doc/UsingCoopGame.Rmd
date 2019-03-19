@@ -1,0 +1,49 @@
+---
+author: | 
+  | Jochen Staudacher, Johannes Anwander
+  | (Hochschule Kempten)
+  | Contact: jochen.staudacher@hs-kempten.de
+title: "Using the R package `CoopGame` for the analysis, solution and visualization of cooperative games with transferable utility"
+date: "`r Sys.Date()`"
+output: rmarkdown::pdf_document
+toc: true
+numbersections: true
+geometry: margin=3.8cm
+papersize: A4
+vignette: >
+  %\VignetteIndexEntry{Using CoopGame}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: references.bib
+csl: biomed-central.csl
+abstract: "This document gives a brief and 
+concise overview of the various functionalities 
+of the package `CoopGame` 
+and presents a few use cases. In particular, we 
+introduce the capabilities of `CoopGame` to create 
+special families of cooperative games, to check 
+game properties and to compute set-valued and 
+point-valued solutions. We also introduce the 
+usage of `CoopGame` for visualizing set-valued and 
+point-valued solutions in the case of three or 
+four players. We end with a brief outlook to future 
+developments. This vignette accompanies version 
+0.2.1 of the package `CoopGame`.\n\n**Keywords**: 
+Cooperative game theory, bankruptcy games, cost games, 
+simple games, unanimity games, weighted voting games,  
+game properties, set-valued solution concepts, 
+point-valued solution concepts, 
+imputation, core, Weber set, Shapley value, 
+Banzhaf value, nucleolus, nucleolus derivatives, 
+modiclus, Gately point, Tau value, 
+power indices."
+header-includes:
+- \usepackage{titling}
+- \preauthor{\begin{center}\large\includegraphics[width=15cm]{media/CoopGameLogo.png}\\[\smallskipamount]}
+- \postauthor{\end{center}}
+---
+```{r eval=TRUE, echo=FALSE}
+child_docs <- list.files(path="chapters",recursive = TRUE, pattern=".Rmd", full.names = TRUE)
+```
+```{r, child = child_docs}
+

@@ -1,0 +1,286 @@
+---
+title: "Game Properties"
+author: "Jochen Staudacher"
+date: "6 March 2019"
+output: pdf_document
+---
+
+
+# Game Properties
+
+The package `CoopGame` provides 
+users with the possibility to check 
+a given game vector $v$ for a number of different game properties.
+In this chapter of our vignette we would like to give 
+a quick overview of these game properties and the 
+precise definitions we use. 
+
+## Checking a game property 
+
+Given that the $17$ different functions for 
+checking various game properties all come with 
+detailed examples in their 
+individual documentations we will only specify 
+the basic principle for checking a game property. 
+Users simply need to specify a game vector and then check 
+the corresponding game property (which always starts with `is`).
+The result will be `TRUE` if 
+the game shares the property in question, else it will be `FALSE`.
+
+```{r, collapse=TRUE}
+library(CoopGame)
+A <-c(0,0,0,1,1,0,1)
+isSuperadditiveGame(A)
+```
+
+## A quick overview of available game properties
+
+### Nonnegative games 
+
+We call a game vector $A$ **nonnegative** if all of its entries 
+are nonnegative. This game property can be checked via the 
+function `isNonnegativeGame`. We provide certain 
+solution concepts 
+for nonnegative games only.
+
+### Essential games
+
+We call a TU game $v$ **essential**, if the value of the 
+grand coalition $v(N)$ is greater than the 
+sum of the values of the singleton 
+coalitions $v(\{i\})$, i.e.
+
+$$v(N) > \sum_{i=1}^{n} v(\{i\}).$$
+
+Our definition follows the books by Chakravarty,
+Mitra and Sarkar [@ChakravartyMitraSarkar], p. 23, 
+and by Gilles [@GillesBook], p. 18.
+We find it very convenient that according to this definition 
+the imputation set of an essential game is nonempty and consists 
+of more than one point.
+This game property can be checked via the 
+function `isEssentialGame`.
+
+### Degenerate games
+
+We call a TU game $v$ **degenerate** (or **inessential**), if 
+the value of the 
+grand coalition $v(N)$ equals the 
+sum of the values of the singleton 
+coalitions $v(\{i\})$, i.e.
+
+$$v(N) = \sum_{i=1}^{n} v(\{i\}).$$
+We find it very convenient that according to this definition 
+the imputation set of a degenerate game consists
+of exactly one point (specified by the singleton coalitions).
+This game property can be checked via the 
+function `isDegenerateGame`.
+
+### Monotonic games
+
+According to the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 12, 
+we call a TU game $v$ **monotonic** if 
+
+$$ S \subseteq T \subseteq N \Rightarrow v(S) \leq v(T). $$
+This game property can be checked via the 
+function `isMonotonicGame`.
+
+### Simple games
+
+Along the lines of the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 16, 
+we call a TU game $v$ **simple** if 
+$v$ is monotonic and the values of all coalitions are 
+$0$ or $1$. This game property can be checked via the 
+function `isSimpleGame`.
+
+### Symmetric games
+
+Following the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 12, 
+we call a TU game $v$ **symmetric** if
+the values of all 
+coalitions containing the same number of players are identical, i.e.
+
+$$ \vert S \vert = \vert T \vert \Rightarrow v(S) = v(T) $$
+for all coalitions $S,T \subseteq N$. 
+This game property can be checked via the 
+function `isSymmetricGame`.
+
+### Constant-sum games 
+
+In a **constant-sum** game $v$ for any coalition $S$ the sums
+of $v(S)$ and its complement $v(N \backslash S)$ equal
+$v(N)$, i.e. 
+$$ v(S) + v(N \backslash S) = v(N) $$
+for all $S \subseteq N$, see e.g. 
+the book by Peleg and Sudhölter 
+[@PelegSudhoelter], p. 11.
+This game property can be checked via the 
+function `isConstantSumGame`.
+
+### Weakly constant-sum games
+We call a TU game $v$ with $n$ players
+**weakly constant-sum** as long as
+the constant-sum condition holds for coalitions of
+sizes $1$ and $n-1$, i.e.
+$$ v(\{i\}) + v(N \backslash \{i\}) = v(N) $$
+for all players $i=1, \dots, n$. In other words:
+For weakly constant-sum games the vector of singleton
+coalitions and the utopia payoff vector coincide.
+This game property comes in handy when checking
+uniqueness conditions for the Gately point, see
+the paper [@StaudacherAnwander] by the authors 
+of this vignette. Also note that
+any constant-sum game is weakly constant-sum, but not
+vice versa.
+This game property can be checked via the 
+function `isWeaklyConstantSumGame`.
+
+
+### Superadditive games
+
+We call a TU game $v$ **superadditive** if 
+
+$$ v(S \cup T) \geq v(S) + v(T) $$
+for all coalitions $S, T \subseteq N$ with $S \cap T = \emptyset$,
+see e.g. the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 10, or 
+the book by Maschler, Solan and 
+Zamir [@MaschlerSolanZamir], p. 671.
+The idea of superadditivity is that disjoint groups of players
+are never punished for cooperating.
+This game property can be checked via the 
+function `isSuperadditiveGame`.
+
+
+### Additive games
+
+We call a TU game $v$ **additive** if 
+
+$$ v(S \cup T) = v(S) + v(T) $$
+for all coalitions $S, T \subseteq N$ with $S \cap T = \emptyset$,
+see e.g. the 
+book by Peleg and Sudhölter [@PelegSudhoelter], p. 11, 
+or the book by Maschler, Solan and Zamir 
+[@MaschlerSolanZamir], p. 792.
+Note that an additive game is always superadditive, constant-sum,
+weakly constant-sum and degenerate whereas none of these four
+game properties guarantee additivity in return.
+This game property can be checked via the 
+function `isAdditiveGame`.
+
+### Weakly superadditive games
+
+We call a TU game $v$ with $n$ players **weakly superadditive** if 
+
+$$ v(S \cup \{ i \}) \geq v(S) + v(\{ i \}) $$
+for all coalitions $S \subseteq N$ and
+all players $i=1, \dots ,n$ with $i \notin S$,
+see e.g. the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 10. Note that
+weak superadditivity is equivalent to 0-monotonicity, i.e. the
+zero-normalization of the game is monotonic, see
+e.g. Maschler, Solan and Zamir [@MaschlerSolanZamir], 
+p. 789, or Peleg and Sudhölter [@PelegSudhoelter], p. 12.
+This game property can be checked via the 
+function `isWeaklySuperadditiveGame`.
+
+### Quasi-balanced games
+Given a TU game $v$ with $n$ players let $m$ denote
+the minimal rights vector and $M$ the utopia payoff vector.
+We call the TU game $v$ **quasi-balanced** if
+$m(i) \leq M(i)$ for all $i=1, \dots, n$ and 
+$$ \sum_{i=1}^{n} m_{i} \leq v(N) \leq \sum_{i=1}^{n} M_{i}, $$
+see e.g. the book 
+by Branzei, Dimitrov and Tijs [@BranzeiBook], p. 31.
+Quasi-balanced games can equivalently be characterized
+as the TU games with a non-empty core cover.
+Note also that the $\tau$-value, an important solution
+concept, is only defined for quasi-balanced games,
+see e.g. the original paper by Tijs [@Tijs1981] 
+from 1981.
+This game property can be checked via the 
+function `isQuasiBalancedGame`.
+
+### Balanced games
+A TU game $v$ is called **balanced** if and only if the core
+of $v$ is non-empty. For the sake of brevity we
+do not go into any details of the balancedness condition
+and the Bondareva-Shapley theorem in this vignette.
+Instead, we only refer to the original papers by 
+Bondareva [@bondareva1963some] and by Shapley
+[@shapley1967balanced] as well as to section 3.1 of
+the book by Peleg and Sudhölter [@PelegSudhoelter] for
+further details.
+This game property can be checked via the 
+function `isBalancedGame`.
+
+### Convex games 
+We call a TU game $v$ **convex** if 
+
+$$ v(S \cup T) + v(S \cap T) \geq v(S) + v(T) $$
+for all $S, T \subseteq N$, see e.g. the book by 
+Peleg and Sudhölter [@PelegSudhoelter], p. 10, 
+for more details. Convex
+games are always
+balanced, i.e. the core of a convex game is never empty, and
+they arise in various important application areas of
+cooperative game theory.
+This game property can be checked via the 
+function `isConvexGame`.
+
+### Semiconvex games
+A TU game $v$ with $n$ players is called **semiconvex**
+if for its gap function $g$ there holds
+$$0 \leq g(i) \leq g(S)$$
+for all players $i=1, \dots, n$ and
+all coalitions $S \subseteq N$ with $i \in S$.
+Note that convex games are always semiconvex but not
+vice versa.
+We refer to the book by Driessen [@DriessenBook], p. 76, or
+the original paper by Driessen 
+and Tijs [@driessen1985tau] for
+more details.
+This game property can be checked via the 
+function `isSemiConvexGame`.
+
+### 1-convex games
+
+A TU game $v$ with $n$ players is called **1-convex**
+if for its gap function $g$ there holds
+$$0 \leq g(N) \leq g(S)$$
+for all coalitions $S \subseteq N$ with $S \neq \emptyset$.
+Note that the 1-cover $v_{1}$ 
+of a 1-convex game $v$ will always be convex.
+We refer to the book by Driessen [@DriessenBook], p. 73, for
+more details.
+This game property can be checked via the 
+function `is1ConvexGame`.
+
+### k-convex games
+k-convexity can be regarded as a generalization of 
+1-convexity. 
+A TU game $v$ with $n$ players is called **k-convex** if 
+and only if its k-cover (see 1.2.14 of this vignette)
+exists and is convex. 
+We refer to section 7.1 of the book by 
+Driessen [@DriessenBook] for more details on k-convex games.
+This game property can be checked via the 
+function `iskConvexGame` by specifying both 
+a game vector $v$ and an integer $k$. We end this chapter 
+with a small example inspired by the book by 
+Driessen [@DriessenBook], p. 175:
+```{r, collapse=TRUE}
+# The following game is 2-convex
+library(CoopGame)
+alpha = 0.48
+v=c(0,0,0,alpha,alpha,0,1)
+iskConvexGame(v,2)
+# The following game is not 2-convex
+library(CoopGame)
+alpha = 0.52
+v=c(0,0,0,alpha,alpha,0,1)
+iskConvexGame(v,2)
+```
