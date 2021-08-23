@@ -4,8 +4,13 @@
 \alias{drawPublicGoodValue}
 \title{Draw Public Good value for 3 or 4 players}
 \usage{
-drawPublicGoodValue(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Normalized Public Good Value")
+drawPublicGoodValue(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Normalized Public Good Value"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

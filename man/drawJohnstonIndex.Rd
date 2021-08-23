@@ -4,8 +4,13 @@
 \alias{drawJohnstonIndex}
 \title{Draw Johnston index for 3 or 4 players}
 \usage{
-drawJohnstonIndex(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Johnston index")
+drawJohnstonIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Johnston index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

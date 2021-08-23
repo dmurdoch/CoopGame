@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Cooperative Games"
 author: "Jochen Staudacher"
-date: "6 March 2019"
+date: "20 August 2021"
 output: pdf_document
 ---
 
@@ -65,10 +65,10 @@ function $v: 2^{N} \to \mathbb{R}$ with $v (\emptyset) = 0$.
 We specify such a TU game with $n$ players as a (game) vector 
 of length $2^n - 1$.
 
-### Vignette for version 0.2.1 of `CoopGame`
+### Vignette for version 0.2.2 of `CoopGame`
 
 This is the place to emphasize once again that this vignette 
-accompanies version 0.2.1 of the `R` package `CoopGame`. 
+accompanies version 0.2.2 of the `R` package `CoopGame`. 
 Future releases of `CoopGame` might incorporate additional 
 functionality and will be accompanied by an update of this 
 vignette. 
@@ -268,10 +268,12 @@ dividing the zero-normalized game vector $w$ by the value
 of the grand coalition $v(N)$.
 In `CoopGame` we provide a corresponding 
 function `getZeroOneNormalizedGameVector`:
-```{r, collapse=TRUE}
+```{r, collapse=TRUE, eval=FALSE}
 library(CoopGame)
 v <- c(30,40,50,90,100,110,180)
 (w01 <- getZeroOneNormalizedGameVector(v))
+## [1] 0.0000000 0.0000000 0.0000000 0.3333333 0.3333333
+## [6] 0.3333333 1.0000000
 ```
 
 For a detailed discussion on the importance 

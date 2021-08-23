@@ -15,6 +15,7 @@ Numeric vector of length n representing the nucleolus.
 }
 \description{
 Computes the nucleolus of a TU game with a non-empty imputation set and n players.
+Note that the nucleolus is a member of the imputation set.
 }
 \examples{
 library(CoopGame)
@@ -49,4 +50,8 @@ Peleg B. and Sudhoelter P. (2007) \emph{Theory of cooperative games}, 2nd Editio
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
+
+Daniel Gebele \email{daniel.a.gebele@stud.hs-kempten.de}
 }

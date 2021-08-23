@@ -4,8 +4,13 @@
 \alias{drawPublicGoodIndex}
 \title{Draw Public Good index for 3 or 4 players}
 \usage{
-drawPublicGoodIndex(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Public Good Index")
+drawPublicGoodIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Public Good Index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

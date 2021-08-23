@@ -1,7 +1,7 @@
 ---
 title: "FutureDevelopments"
 author: "Jochen Staudacher"
-date: "6 March 2019"
+date: "21 August 2019"
 output: pdf_document
 ---
 
@@ -12,40 +12,93 @@ As previously mentioned the package `CoopGame` does not
 allow for partitions of the player set or for 
 communication structures (see e.g. the 
 book by Slikker and van den Nouweland [@SlikkerNouweland]).
-The authors of this vignette are about to finish to 
+The first author of this vignette is about to finish two 
 smaller R packages by the names of `PartitionGames` and 
 `CommunicationGames` for cooperative games with 
 partitions of the player set and for cooperative 
-games on undirected graphs, respectively. 
+games on undirected graphs, respectively. For cooperative 
+games with partitions of the player set we refer the 
+readers to the three articles by Owen [@owen1977values], by 
+Malawski [@malawski2004counting] and by Stach [@stach2017sub].
+For cooperative games on undirected graphs we refer to the three
+papers by Myerson [@myerson1977graphs], by Borm, Owen 
+and Tijs [@borm1992position] and by van den Brink, van der Laan 
+and Pruzhansky [@van2011harsanyi].
 
-Cooperative games on directed networks might be 
+Once `PartitionGames` and `CommunicationGames` will have 
+been successfully established, cooperative games on directed networks might be 
 the subject of a future R package. 
-In this context we refer to the articles by 
-Gilles, Owen and van den Brink [@gilles1992games] 
-and by Gilles and van den Brink [@van1996axiomatizations] 
+We refer to the articles by 
+Gilles, Owen and van den Brink [@gilles1992games],
+by Gilles and van den Brink [@van1996axiomatizations], 
+and by van den Brink [@van1997axiomatization]
 on permission structures as well as to the 
 article by Gilles and van den Brink on measuring 
 domination in directed networks [@van2000measuring].
 Chapters 5 and 6 of the book by Gilles [@GillesBook]
-provide an excellent insight into this exciting field.
+provide an excellent insight into this exciting field 
+where public domain implementations of established 
+approaches are still scarce. In the context of 
+hierarchical structures modelled 
+by a directed graph, the works by Faigle and Kern [@faigle1992shapley] 
+and by Algaba, van den Brink and Dietz [@algaba2017power]
+investigating cooperative game theory solutions under 
+precedence constraints are also worth mentioning. So is 
+the very recent article on the Shapley value 
+and games with hierarchies by Algaba and 
+van den Brink [@algaba2019shapley] 
+which appeared in the Handbook of the Shapley Value [@algaba2019handbook] in 2020.
+There also exist studies into structures taking into account both 
+communication and hierarchy properties, see the article on 
+network structures with hierarchy and communication 
+by Algaba, van den Brink and Dietz [@algaba2018network].
+
 
 Cooperative games on multigraphs offer another 
 of many possible lines of future investigations, 
 see e.g. the article by Forlicz, Mercik, 
 Stach and Ramsey [@forlicz2018shapley].
 
-Currently, the authors could think of various other 
+A classical application area for cooperative game theory 
+on graphs is the study of indirect control power in 
+corporate networks, see e.g. the articles by 
+Bertini, Mercik and Stach [@bertini2016indirect],
+by Karos and Peters [@karos2015indirect]
+or by Mercik and Stach [@mercik2018measurement].
+We mention a recent article by Staudacher, Olsson 
+and Stach [@staudacher2021implicit]
+which employs both R and the package `CoopGame` 
+for measuring indirect control.
+
+
+Currently, the first author of this vignette could think of various other 
 ideas for software connected to the field of cooperative 
 game theory beyond coalition structures, graphs or 
 multigraphs. We already mentioned that `CoopGame` is far 
-from efficient for computing power indices. A software 
-package for efficient and truly powerful computation 
-of power indices could be a possible project for the future. 
-In this context, the idea of generating functions 
+from efficient for computing power indices. Software 
+packages for efficient and truly powerful computation 
+of power indices appear very worthwhile. In this 
+context, we wish to mention three approaches. The 
+first is the paradigm of dynamic programming, see 
+e.g. the article by Kurz [@kurz2016computing] from 2016 and the 
+2021 article by Staudacher, Stach, Kóczy, 
+Filipp, Kramer, Noffke, Olsson, Pichler and Singer 
+[@staudacherDynamicProgramming2021ORD] which both
+focus on the special case of weighted voting games.
+The second is a recent approach based on relational algebra
+called quasi-ordered binary
+decision diagrams (QOBDDs), see the papers by
+Berghammer, Bolus, Rusinowska and de Swart [@berghammer2011relation], 
+by Berghammer and Bolus [@berghammer2012use], 
+by Bolus [@bolus2011power] as well as the doctoral
+dissertation by Bolus [@bolus2012qobdd].
+Finally, the idea of generating functions 
 appears to be of paramount importance, see e.g. the 
-article by 
-Bilbao, Fernandez, Jimenez Losada and 
-Lopez [@bilbao2000generating] and the article by 
+articles by Algaba, Bilbao, 
+Fernandez Garcia and Lopez [@algaba2003computing], 
+by Algaba, Bilbao, Fernandez Garcia [@algaba2007distribution],
+by Bilbao, Fernandez, Jimenez Losada and 
+Lopez [@bilbao2000generating] and by 
 Alonso-Meijide and Bowles [@alonso2005generating].
 
 Cooperative games in a continuous setting are very 
@@ -65,7 +118,7 @@ game theory in a continuous setting combining both
 symbolic and numeric computation appears both 
 challenging and attractive. 
 
-## Acknowledgements
+## Acknowledgements for version 0.2.1
 
 The R package `CoopGame` started as a software project 
 in the Computer Science M.Sc. program at Kempten University 
@@ -91,7 +144,7 @@ small parts of
 an unfinished version of `CoopGame` to fellow researchers 
 and colleagues in the field of cooperative game theory. 
 The package `CoopGame` benefited from detailed discussions 
-with Izabella Stach (AGH Krakau), 
+with Izabella Stach (AGH Kraków), 
 Gianfranco Gambarelli (University of Bergamo) and 
 Tamás Solymosi (Corvinus University Budapest) during that 
 conference.
@@ -118,3 +171,23 @@ for four years and, in particular, for having provided
 a subversion server for `CoopGame` until its ultimate 
 release on CRAN.
 
+## Acknowledgements for version 0.2.2
+
+Version 0.2.2 of `CoopGame` is only a very minor update to version 0.2.1.
+It solves an internal problem in the automatic generation of this vignette, 
+no longer requires users of `CoopGame` to install the library `rgl` and 
+fixes very few (but certainly not all) bugs. Nevertheless, the package maintainer 
+wishes to thank many of his students and his colleagues -- far too numerous to name them all --
+for their feedback on `CoopGame` and their suggestions for 
+improvements and additional functionality (none of which have been 
+incorporated in version 0.2.2). 
+Special thanks go to 
+Encarnación Algaba (Universidad de Sevilla) who provided the package maintainer with precious suggestions 
+for future software development as well
+as with references to the literature for improving section 7.1 of this vignette in March 2020. 
+Finally, the first author wishes to express his deep gratitude to his friend and coauthor 
+Izabella Stach (AGH Kraków) for having advertised `CoopGame` within her research community 
+immediately after its initial release in March 2019, for having introduced him
+to many esteemed colleagues in the scientific community and for the humour she constantly provides 
+in their research cooperation even in situations when she feels that more efficient
+software than `CoopGame` is needed. 

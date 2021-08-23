@@ -1,30 +1,32 @@
-## ----eval=TRUE, echo=FALSE-----------------------------------------------
+## ----eval=TRUE, echo=FALSE----------------------------------------------------
 child_docs <- list.files(path="chapters",recursive = TRUE, pattern=".Rmd", full.names = TRUE)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 (v <- c(0,0,0,100,115,125,220))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 (Maschler <- c(0,0,0,60,60,60,72))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <- c(30,40,50,90,100,110,180)
 (w <- getZeroNormalizedGameVector(v))
 
-## ---- collapse=TRUE------------------------------------------------------
-library(CoopGame)
-v <- c(30,40,50,90,100,110,180)
-(w01 <- getZeroOneNormalizedGameVector(v))
+## ---- collapse=TRUE, eval=FALSE-----------------------------------------------
+#  library(CoopGame)
+#  v <- c(30,40,50,90,100,110,180)
+#  (w01 <- getZeroOneNormalizedGameVector(v))
+#  ## [1] 0.0000000 0.0000000 0.0000000 0.3333333 0.3333333
+#  ## [6] 0.3333333 1.0000000
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 (Maschler <- c(0,0,0,60,60,60,72))
 createBitMatrix(n=3,Maschler)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <- c(3,4,5,9,10,11,18)
 (MC <- getMarginalContributions(v))
@@ -34,55 +36,55 @@ MC$combinations
 # corresponding to these permutations
 MC$marginal_values
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 MC$marginal_values[2,]
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <- c(3,4,5,9,10,11,18)
 # Compute dual game vector
 (vStar <- getDualGameVector(v))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <- c(3,4,5,9,10,11,18)
 # Compute utopia payoff vector for specified game v
 (M <- getUtopiaPayoff(v))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <- c(2,3,4,8,9,10,13)
 # Compute minimal rights vector for specified game v
 (m <- getMinimalRights(v))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 A <-c(3,4,5,9,10,11,18)
 x <-c(5,6,7)
 # Compute vector of excess coefficients for specified game v
 (ec <- getExcessCoefficients(A,x))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 A <-c(3,4,5,9,10,11,18)
 # Compute vector of gap function coefficients for specified game v
 (gap <- getGapFunctionCoefficients(A))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 A <-c(3,4,5,9,10,11,18)
 x <-c(5,6,7)
 # Compute vector of per capita excess coefficients for specified game v
 (ecpc <- getPerCapitaExcessCoefficients(A,x))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 A <-c(3,4,5,9,10,11,18)
 x <-c(5,6,7)
 # Compute vector of propensities to disrupt for specified game v
 (propVec <- getVectorOfPropensitiesToDisrupt(A,x))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 # Define a simple game
 A <-c(0,0,0,1,1,0,1)
@@ -91,27 +93,27 @@ getMinimumWinningCoalitions(A)
 # Find the coalitions where player 2 is critical
 getCriticalCoalitionsOfPlayer(2,A)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 A <-c(0,0,0,0.8,0.9,0,0.9)
 # Find the real gaining coalitions
 getRealGainingCoalitions(A)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 # The Maschler game
 Maschler <-c(0,0,0,60,60,60,72)
 # Find the unanimity coefficients for the Maschler game
 (unCoeff <- getUnanimityCoefficients(Maschler))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 # Example from book by T. Driessen, p. 75
 A=c(0,0,0,9,9,15,18)
 # Compute 1-cover of this 1-convex game
 (A1 <- getkCover(A,k=1))
 
-## ---- collapse=TRUE,eval=FALSE-------------------------------------------
+## ---- collapse=TRUE,eval=FALSE------------------------------------------------
 #  library(CoopGame)
 #  bankruptcyGame(n=3,d=c(100,200,300),E=300)
 #  ## $n
@@ -126,7 +128,7 @@ A=c(0,0,0,9,9,15,18)
 #  ## $v
 #  ## [1]   0   0   0   0 100 200 300
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 # First approach
 bankruptcyGameVector(n=3,d=c(100,200,300),E=300)
@@ -134,11 +136,11 @@ bankruptcyGameVector(n=3,d=c(100,200,300),E=300)
 # Alternative approach
 bankruptcyGame(n=3,d=c(100,200,300),E=300)$v
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 bankruptcyGameValue(S=c(2,3),d=c(100,200,300),E=300)
 
-## ---- collapse=TRUE, eval=FALSE------------------------------------------
+## ---- collapse=TRUE, eval=FALSE-----------------------------------------------
 #  library(CoopGame)
 #  TVACosts=c(163520,140826,250096,301607,378821,367370,412584)
 #  (tvaCostGame <- costSharingGame(n=3, TVACosts))
@@ -155,68 +157,68 @@ bankruptcyGameValue(S=c(2,3),d=c(100,200,300),E=300)
 #  (v <- costSharingGameVector(n=3, TVACosts))
 #  ## [1] 0 0 0 2739 34795 23552 141858
 
-## ---- collapse = TRUE----------------------------------------------------
+## ---- collapse = TRUE---------------------------------------------------------
 library(CoopGame)
 gloveGame(n=3,L=c(1,3),R=2)$v
 #
 # Equivalent alternative approach
 gloveGameVector(n=3,L=c(1,3),R=2)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 cardinalityGame(4)$v
 #
 # Equivalent alternative approach
 cardinalityGameVector(4)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 weightedVotingGame(n=3, w=c(3,5,4), q=8)$v
 #
 # Equivalent alternative approach
 weightedVotingGameVector(n=3, w=c(3,5,4), q=8)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 majoritySingleVetoGame(n=4, vetoPlayer=2)$v
 #
 # Equivalent alternative approach
 majoritySingleVetoGameVector(n=4, vetoPlayer=2)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 unanimityGame(n=4, T=c(1,4))$v
 #
 # Equivalent alternative approach 
 unanimityGameVector(n=4, T=c(1,4))
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 apexGame(n=4, apexPlayer=2)$v
 #
 # Equivalent alternative approach 
 apexGameVector(n=4, apexPlayer=2)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 dictatorGame(n=4, dictator=3)$v
 #
 # Equivalent alternative approach 
 dictatorGameVector(n=4, dictator=3)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 divideTheDollarGame(3)$v
 #
 # Equivalent alternative approach
 divideTheDollarGameVector(3)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 A <-c(0,0,0,1,1,0,1)
 isSuperadditiveGame(A)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 # The following game is 2-convex
 library(CoopGame)
 alpha = 0.48
@@ -228,24 +230,24 @@ alpha = 0.52
 v=c(0,0,0,alpha,alpha,0,1)
 iskConvexGame(v,2)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <-c(0,0,0,1,1,0,1)
 imputationsetVertices(v)
 belongsToImputationset(c(0.7,0.3,0),v)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v <-c(0,0,0,1,1,0,3)
 coreVertices(v)
 belongsToCore(c(1.7,1.3,0),v)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 Aumann2010Example<-c(120,60,40,30,120,120,120,60,60,40,120,120,120,60,120)
 shapleyValue(Aumann2010Example)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 v100 = bankruptcyGameVector(n=3,d=c(100,200,300),E=100)
 nucleolus(v100)
@@ -254,7 +256,7 @@ nucleolus(v200)
 v300 = bankruptcyGameVector(n=3,d=c(100,200,300),E=300)
 nucleolus(v300)
 
-## ---- collapse=TRUE------------------------------------------------------
+## ---- collapse=TRUE-----------------------------------------------------------
 library(CoopGame)
 TVACosts=c(163520,140826,250096,301607,378821,367370,412584)
 (v <- costSharingGameVector(n=3, TVACosts))
@@ -263,7 +265,7 @@ TVACosts[1:3] - shapleyValue(v)
 TVACosts[1:3] - nucleolus(v)
 TVACosts[1:3] - tauValue(v)
 
-## ---- collapse=TRUE, eval=FALSE------------------------------------------
+## ---- collapse=TRUE, eval=FALSE-----------------------------------------------
 #  library(CoopGame)
 #  v<-weightedVotingGameVector(n=5, w=c(6,4,1,1,1), q=9)
 #  normalizedBanzhafIndex(v)
@@ -294,7 +296,7 @@ TVACosts[1:3] - tauValue(v)
 #  publicHelpChiIndex(v)
 #  ## [1] 0.3309524 0.3309524 0.1126984 0.1126984 0.1126984
 
-## ---- collapse=TRUE, eval=FALSE------------------------------------------
+## ---- collapse=TRUE, eval=FALSE-----------------------------------------------
 #  library(CoopGame)
 #  v<-weightedVotingGameVector(n=10, w=c(9,8,7,0,1,1,1,1,1,1), q=23)
 #  normalizedBanzhafIndex(v)
@@ -337,7 +339,7 @@ TVACosts[1:3] - tauValue(v)
 #  ## [1] 0.16941222 0.16941222 0.16881669 0.07033698 0.07033698 0.07033698
 #  ## [7] 0.07033698 0.07033698 0.07033698 0.07033698
 
-## ---- collapse=TRUE, eval=FALSE------------------------------------------
+## ---- collapse=TRUE, eval=FALSE-----------------------------------------------
 #  library(CoopGame)
 #  v<-weightedVotingGameVector(n=8, w=c(277,198,68,40,39,27,15,68), q=367)
 #  shapleyShubikIndex(v)
@@ -356,7 +358,7 @@ TVACosts[1:3] - tauValue(v)
 #  ## [1] 0.18518519 0.11111111 0.14814815 0.12962963 0.12962963 0.11111111
 #  ## [7] 0.03703704 0.14814815
 
-## ---- collapse=TRUE, fig.show=TRUE---------------------------------------
+## ---- collapse=TRUE, fig.show=TRUE--------------------------------------------
 library(CoopGame)
 v0=c(6,8,10,18,20,22,31)
 drawImputationset(v0, label=FALSE)
@@ -364,14 +366,14 @@ drawReasonableSet(v0, colour="blue", holdOn=TRUE)
 drawCore(v0, holdOn=TRUE, colour="red")
 drawModiclus(v0, holdOn=TRUE, colour="black")
 
-## ---- collapse=TRUE, fig.show=TRUE---------------------------------------
+## ---- collapse=TRUE, fig.show=TRUE--------------------------------------------
 library(CoopGame)
 v0=c(6,8,10,18,20,22,31)
 drawReasonableSet(v0, colour="blue")
 drawCore(v0, holdOn=TRUE, colour="red")
 drawModiclus(v0, holdOn=TRUE, colour="black")
 
-## ---- collapse=TRUE, fig.show=FALSE, eval=FALSE--------------------------
+## ---- collapse=TRUE, fig.show=FALSE, eval=FALSE-------------------------------
 #  #library(CoopGame)
 #  #A=c(0,0,0,0,8,8,8,8,8,8,12,12,12,12,22)
 #  #drawWeberset(A, colour ="grey")

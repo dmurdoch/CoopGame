@@ -16,6 +16,7 @@ per capita nucleolus for a specified TU game with n players
 \description{
 perCapitaNucleolus calculates the per capita nucleolus for 
 a TU game with a non-empty imputation set specified by a game vector.
+Note that the per capita nucleolus is a member of the imputation set.
 }
 \examples{
 library(CoopGame)
@@ -34,4 +35,6 @@ Young H.P. (1985) "Monotonic Solutions of cooperative games", Int. Journal of Ga
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
 }

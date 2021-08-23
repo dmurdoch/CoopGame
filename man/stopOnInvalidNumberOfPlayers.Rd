@@ -32,24 +32,25 @@ stopOnInvalidNumberOfPlayers(paramCheckResult, n=validNumberOfPlayers)
 
 }
 \seealso{
-Other ParameterChecks_CoopGame: \code{\link{getEmptyParamCheckResult}},
-  \code{\link{stopOnInconsistentEstateAndClaimsVector}},
-  \code{\link{stopOnInvalidAllocation}},
-  \code{\link{stopOnInvalidBoolean}},
-  \code{\link{stopOnInvalidClaimsVector}},
-  \code{\link{stopOnInvalidCoalitionS}},
-  \code{\link{stopOnInvalidDictator}},
-  \code{\link{stopOnInvalidEstate}},
-  \code{\link{stopOnInvalidGameVector}},
-  \code{\link{stopOnInvalidGrandCoalitionN}},
-  \code{\link{stopOnInvalidIndex}},
-  \code{\link{stopOnInvalidLeftRightGloveGame}},
-  \code{\link{stopOnInvalidNChooseB}},
-  \code{\link{stopOnInvalidNumber}},
-  \code{\link{stopOnInvalidQuota}},
-  \code{\link{stopOnInvalidVetoPlayer}},
-  \code{\link{stopOnInvalidWeightVector}},
-  \code{\link{stopOnParamCheckError}}
+Other ParameterChecks_CoopGame: 
+\code{\link{getEmptyParamCheckResult}()},
+\code{\link{stopOnInconsistentEstateAndClaimsVector}()},
+\code{\link{stopOnInvalidAllocation}()},
+\code{\link{stopOnInvalidBoolean}()},
+\code{\link{stopOnInvalidClaimsVector}()},
+\code{\link{stopOnInvalidCoalitionS}()},
+\code{\link{stopOnInvalidDictator}()},
+\code{\link{stopOnInvalidEstate}()},
+\code{\link{stopOnInvalidGameVector}()},
+\code{\link{stopOnInvalidGrandCoalitionN}()},
+\code{\link{stopOnInvalidIndex}()},
+\code{\link{stopOnInvalidLeftRightGloveGame}()},
+\code{\link{stopOnInvalidNChooseB}()},
+\code{\link{stopOnInvalidNumber}()},
+\code{\link{stopOnInvalidQuota}()},
+\code{\link{stopOnInvalidVetoPlayer}()},
+\code{\link{stopOnInvalidWeightVector}()},
+\code{\link{stopOnParamCheckError}()}
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}

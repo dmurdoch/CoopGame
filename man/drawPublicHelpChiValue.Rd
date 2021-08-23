@@ -4,8 +4,13 @@
 \alias{drawPublicHelpChiValue}
 \title{Draw Public Help value Chi for 3 or 4 players}
 \usage{
-drawPublicHelpChiValue(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Normalized Public Help Value Chi")
+drawPublicHelpChiValue(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Normalized Public Help Value Chi"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

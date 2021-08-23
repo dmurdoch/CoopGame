@@ -4,8 +4,13 @@
 \alias{drawPublicHelpValue}
 \title{Draw Public Help value Theta for 3 or 4 players}
 \usage{
-drawPublicHelpValue(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Normalized Public Help Value")
+drawPublicHelpValue(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Normalized Public Help Value"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

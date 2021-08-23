@@ -5,8 +5,7 @@
 \alias{drawTijsValue}
 \title{Draw tau-value for 3 or 4 players}
 \usage{
-drawTauValue(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Tau value")
+drawTauValue(v, holdOn = FALSE, colour = NA, label = TRUE, name = "Tau value")
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

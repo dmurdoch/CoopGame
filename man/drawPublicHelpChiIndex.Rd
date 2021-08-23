@@ -4,8 +4,13 @@
 \alias{drawPublicHelpChiIndex}
 \title{Draw Public Help index Chi for 3 or 4 players}
 \usage{
-drawPublicHelpChiIndex(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Public Help Chi Index")
+drawPublicHelpChiIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Public Help Chi Index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

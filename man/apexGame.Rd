@@ -32,7 +32,7 @@ Note that apex games are always simple games.
 }
 
 \examples{
-#' library(CoopGame)
+library(CoopGame)
 apexGameVector(n=3,apexPlayer=2)
 
 \donttest{

@@ -3,6 +3,8 @@
 \name{publicHelpChiValue}
 \alias{publicHelpChiValue}
 \alias{publicHelpValueChi}
+\alias{publicHelpXiValue}
+\alias{publicHelpValueXi}
 \title{Compute (normalized) Public Help value Chi}
 \usage{
 publicHelpChiValue(v)
@@ -17,6 +19,8 @@ Public Help value Chi for specified nonnegative TU game
 \description{
 Calculates the (normalized) Public Help value Chi 
 by Bertini & Stach (2015) for a nonnegative TU game.
+Note that the greek letter Xi (instead of Chi) was used in the 
+original paper by Bertini and Stach (2015).
 }
 \examples{
 library(CoopGame)

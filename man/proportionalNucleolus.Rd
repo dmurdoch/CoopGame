@@ -17,6 +17,7 @@ proportional nucleolus for specified TU game with n players
 proportionalNucleolus calculates the proportional 
 nucleolus for a TU game with a non-empty imputation set and 
 n players specified by game vector.
+Note that the proportional nucleolus is a member of the imputation set.
 }
 \examples{
 library(CoopGame)
@@ -29,4 +30,6 @@ Young H. P., Okada N. and Hashimoto, T. (1982) "Cost allocation in water resourc
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
 }

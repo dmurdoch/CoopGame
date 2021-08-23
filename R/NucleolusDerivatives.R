@@ -1,10 +1,13 @@
 #' @name nucleolus
 #' @title Compute nucleolus 
 #' @description Computes the nucleolus of a TU game with a non-empty imputation set and n players.
+#' Note that the nucleolus is a member of the imputation set.
 #' @aliases nucleolus 
 #' @import rcdd
 #' @export nucleolus
 #' @template author/JS
+#' @template author/JA
+#' @template author/DG
 #' @template cites/SCHMEIDLER_1969
 #' @templateVar SCHMEIDLER_1969_P pp. 1163--1170
 #' @template cites/KOHLBERG_1971
@@ -154,10 +157,13 @@ logicNucleolusDerivatives<-function(A, ER, FR, isImput, isNType){
 #' @name Prenucleolus
 #' @title Compute prenucleolus
 #' @description Computes the prenucleolus of a TU game with n players.
+#' Note that the prenucleolus is a member of the set of preimputations.
 #' @aliases prenucleolus 
 #' @import rcdd
 #' @export prenucleolus
 #' @template author/JS
+#' @template author/JA
+#' @template author/DG
 #' @template cites/PELEG_ET_SUDHOELTER_2007
 #' @templateVar PELEG_ET_SUDHOELTER_2007_P pp. 107--132
 #' @template param/v
@@ -207,10 +213,12 @@ prenucleolus<-function(v){
 #' @title Compute per capita nucleolus
 #' @description perCapitaNucleolus calculates the per capita nucleolus for 
 #' a TU game with a non-empty imputation set specified by a game vector.
+#' Note that the per capita nucleolus is a member of the imputation set.
 #' @aliases perCapitaNucleolus 
 #' @import rcdd
 #' @export perCapitaNucleolus
 #' @template author/JS
+#' @template author/JA
 #' @template cites/YOUNG_1985
 #' @templateVar YOUNG_1985_P pp. 65--72
 #' @template param/v
@@ -247,10 +255,12 @@ perCapitaNucleolus<-function(v){
 #' @description proportionalNucleolus calculates the proportional 
 #' nucleolus for a TU game with a non-empty imputation set and 
 #' n players specified by game vector.
+#' Note that the proportional nucleolus is a member of the imputation set.
 #' @aliases proportionalNucleolus 
 #' @import rcdd
 #' @export proportionalNucleolus
 #' @template author/JS
+#' @template author/JA
 #' @template cites/YOUNG_ET_AL_1982
 #' @templateVar YOUNG_ET_AL_1982_P pp. 463--475
 #' @template param/v
@@ -286,11 +296,13 @@ proportionalNucleolus<-function(v){
 
 #' @name disruptionNucleolus
 #' @title Compute disruption nucleolus
-#' @description Computes the disruption nucleolus of a balanced TU game with n players
+#' @description Computes the disruption nucleolus of a balanced TU game with n players.
+#' Note that the disruption nucleolus needs to be a member of the core.
 #' @aliases disruptionNucleolus 
 #' @import rcdd
 #' @export disruptionNucleolus
 #' @template author/JS
+#' @template author/JA
 #' @template cites/LITTLECHILD_ET_VAIDYA_1976
 #' @templateVar LITTLECHILD_ET_VAIDYA_1976_P pp. 151--161
 #' @template param/v
@@ -339,10 +351,12 @@ disruptionNucleolus<-function(v){
 #' @description Calculates the modiclus of a TU game with a non-empty imputation set and n players.
 #' Note that the modiclus is also know as the modified nucleolus in the literature.
 #' Due to complexity of modiclus computation we recommend to use this function for at most n=11 players.
+#' Note that the modiclus is a member of the set of preimputations.
 #' @aliases modiclus 
 #' @import rcdd
 #' @export modiclus
 #' @template author/JS
+#' @template author/JA
 #' @template cites/PELEG_ET_SUDHOELTER_2007
 #' @templateVar PELEG_ET_SUDHOELTER_2007_P pp. 124--132
 #' @template cites/SUDHOELTER_1997
@@ -366,15 +380,16 @@ modiclus<-function(v){
     paramCheckResult=getEmptyParamCheckResult()
     initialParamCheck_Nuc(paramCheckResult = paramCheckResult, v)
     A = v  
-    isImp = T
+    isImp = F
     isNT = F
     N <- length(A)
     n <- getNumberOfPlayers(A)
     rhs = determineModiclusRlb(A)
     restrMat = determineModiclusMatrix(A)
     excessR = cbind(rep(0,nrow(restrMat)), -rhs, restrMat)
-    furtherR = cbind(rep(0,n),-A[1:n], diag(n),rep(0,n))
-    furtherR = rbind(c(1, A[N], rep(-1,n),0), furtherR)
+    # Note that the modiclus is a preimputation.
+    # furtherR = cbind(rep(0,n),-A[1:n], diag(n),rep(0,n))
+    furtherR = c(1, A[N], rep(-1,n),0)
     return(logicNucleolusDerivatives(A, excessR, furtherR, isImp, isNT))
 }
 
@@ -400,7 +415,7 @@ determineModiclusMatrix<-function(A){
 determineModiclusRlb<-function(A){
   rlb<-c()
   N=length(A)
-  for(i in 1:(N-1)){   #originial (N-1)
+  for(i in 1:(N-1)){   #original (N-1)
     valuesOfT=A[c(-i,-N)] #original c(-i,-N)
     rlbValues=sapply(valuesOfT,function(x){A[i]-x})
     rlb<-c(rlb,rlbValues)
@@ -413,10 +428,12 @@ determineModiclusRlb<-function(A){
 #' @name simplifiedModiclus
 #' @title Compute simplified modiclus 
 #' @description Computes the simplified modiclus of a TU game with a non-empty imputation set and n players.
+#' Note that the simplified modiclus is a member of the set of preimputations.
 #' @aliases simplifiedModiclus 
 #' @import rcdd
 #' @export simplifiedModiclus
 #' @template author/JS
+#' @template author/JA
 #' @template cites/TARASHNINA_2011
 #' @templateVar TARASHNINA_2011_P pp. 150--166
 #' @template param/v
@@ -441,15 +458,16 @@ simplifiedModiclus<-function(v){
     paramCheckResult=getEmptyParamCheckResult()
     initialParamCheck_Nuc(paramCheckResult = paramCheckResult, v)
     A = v  
-    isImp = T
+    isImp = F
     isNT = F
     N <- length(A)
     n <- getNumberOfPlayers(A)
     rhs = determineSimplifiedModiclusRlb(A)
     restrMat = determineSimplifiedModiclusMatrix(A)
     excessR = cbind(rep(0,nrow(restrMat)), -rhs, restrMat)
-    furtherR = cbind(rep(0,n),-A[1:n], diag(n),rep(0,n))
-    furtherR = rbind(c(1, A[N], rep(-1,n),0), furtherR)
+    # Note that the simplified modiclus is a preimputation.
+    # furtherR = cbind(rep(0,n),-A[1:n], diag(n),rep(0,n))
+    furtherR = c(1, A[N], rep(-1,n),0)
     return(logicNucleolusDerivatives(A, excessR, furtherR, isImp, isNT))
 }
 

@@ -4,8 +4,13 @@
 \alias{drawSimplifiedModiclus}
 \title{Draw simplified modiclus for 3 or 4 players}
 \usage{
-drawSimplifiedModiclus(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Simplified Modiclus")
+drawSimplifiedModiclus(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Simplified Modiclus"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

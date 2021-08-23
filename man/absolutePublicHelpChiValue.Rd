@@ -3,6 +3,8 @@
 \name{absolutePublicHelpChiValue}
 \alias{absolutePublicHelpChiValue}
 \alias{absolutePublicHelpValueChi}
+\alias{absolutePublicHelpXiValue}
+\alias{absolutePublicHelpValueXi}
 \title{Compute absolute Public Help value Chi}
 \usage{
 absolutePublicHelpChiValue(v)
@@ -19,6 +21,8 @@ Calculates the absolute Public Help value Chi for a specified nonnegative TU gam
 Note that in general the absolute Public Help value Chi is not an 
 efficient vector, i.e. the sum of its entries is not always 1. Hence no 
 drawing routine for the absolute Public Help value Chi is provided.
+Note that the greek letter Xi (instead of Chi) was used in the 
+original paper by Bertini and Stach (2015).
 }
 \examples{
 library(CoopGame)

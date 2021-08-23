@@ -4,8 +4,13 @@
 \alias{drawNormalizedBanzhafIndex}
 \title{draw normalized Banzhaf Index for 3 or 4 players}
 \usage{
-drawNormalizedBanzhafIndex(v, holdOn = FALSE, colour = NA,
-  label = TRUE, name = "Normalized Banzhaf index")
+drawNormalizedBanzhafIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Normalized Banzhaf index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

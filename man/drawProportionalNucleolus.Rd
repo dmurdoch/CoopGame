@@ -4,8 +4,13 @@
 \alias{drawProportionalNucleolus}
 \title{Draw proportional nucleolus for 3 or 4 players}
 \usage{
-drawProportionalNucleolus(v, holdOn = FALSE, colour = NA,
-  label = TRUE, name = "Proportional Nucleolus")
+drawProportionalNucleolus(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Proportional Nucleolus"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

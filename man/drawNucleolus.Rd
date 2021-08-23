@@ -4,8 +4,7 @@
 \alias{drawNucleolus}
 \title{Draw nucleolus for 3 or 4 players}
 \usage{
-drawNucleolus(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Nucleolus")
+drawNucleolus(v, holdOn = FALSE, colour = NA, label = TRUE, name = "Nucleolus")
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

@@ -4,8 +4,13 @@
 \alias{drawPublicHelpIndex}
 \title{Draw Public Help index Theta for 3 or 4 players}
 \usage{
-drawPublicHelpIndex(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Public Help Index")
+drawPublicHelpIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Public Help Index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

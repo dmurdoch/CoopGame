@@ -18,6 +18,7 @@ of the specified TU game.
 Calculates the modiclus of a TU game with a non-empty imputation set and n players.
 Note that the modiclus is also know as the modified nucleolus in the literature.
 Due to complexity of modiclus computation we recommend to use this function for at most n=11 players.
+Note that the modiclus is a member of the set of preimputations.
 }
 \examples{
 library(CoopGame)
@@ -39,4 +40,6 @@ Sudhoelter P. (1996) "The Modified Nucleolus as Canonical Representation of Weig
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
 }

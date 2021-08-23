@@ -7,26 +7,30 @@
 #' @param  label activates the label for the figur
 #' @param  name set a name for the label
 #' @template author/FM
+#' @template author/JS
 #' @noRd
  
 Visualizer4Point <- function(A, pointsToDraw, colour = NA , label=TRUE, name = NULL){ 
-  if(is.na(colour)){
-    colour="black"
-  }
-  #Eckpoints for imputationset
-  X=rbind(c(0, 0, 0),  
-          c(1, 0, 0),
-          c(0.5, 0.5 * sqrt(3), 0),
-          c(0.5, 1/6 * sqrt(3), 1/3 *sqrt(6)))
-  
-  vertices = bary2cart(X,pointsToDraw/A[15])
-  
-  #Drawing the point
-  points3d(vertices[1],vertices[2],vertices[3],col=colour,size=10.0)
-  
-  #Label
-  if(label == TRUE)
-  {
-    setLabels(A, pointsToDraw, name)
-  }
+  if (requireNamespace("rgl", quietly = TRUE)) {
+    if(is.na(colour)){
+      colour="black"
+    }
+    #Vertices for imputationset
+    X=rbind(c(0, 0, 0),  
+            c(1, 0, 0),
+            c(0.5, 0.5 * sqrt(3), 0),
+            c(0.5, 1/6 * sqrt(3), 1/3 *sqrt(6)))
+    
+    vertices = bary2cart(X,pointsToDraw/A[15])
+    
+    #Drawing the points
+    rgl::points3d(vertices[1],vertices[2],vertices[3],col=colour,size=10.0)
+    
+    #Label
+    if(label == TRUE)
+    {
+      setLabels(A, pointsToDraw, name)
+    }
+  } else
+  { print("Please install the package 'rgl' in order to generate plots visualizing 4-player TU games")}
 }

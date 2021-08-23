@@ -4,8 +4,13 @@
 \alias{drawCentroidWeberSet}
 \title{draw centroid of Weber set for 3 or 4 players}
 \usage{
-drawCentroidWeberSet(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "centroid of Weber set")
+drawCentroidWeberSet(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "centroid of Weber set"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

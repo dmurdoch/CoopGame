@@ -119,7 +119,6 @@ belongsToReasonableSet<-function(x,v){
 #' @description drawReasonableSet draws the reasonable set for 3 or 4 players.
 #' @aliases drawReasonableSet
 #' @export drawReasonableSet
-#' @import rgl
 #' @template author/JS
 #' @template cites/MILNOR_1953
 #' @template cites/BRANZEI_ET_AL_2006

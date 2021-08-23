@@ -1,7 +1,9 @@
 #' @name publicHelpChiIndex
 #' @title Compute Public Help index Chi
 #' @description Calculates the Public Help index Chi for a specified simple TU game.
-#' @aliases publicHelpChiIndex publicHelpIndexChi
+#' Note that the greek letter Xi (instead of Chi) was used in the 
+#' original paper by Bertini and Stach (2015). 
+#' @aliases publicHelpChiIndex publicHelpIndexChi publicHelpXiIndex publicHelpIndexXi
 #' @export publicHelpChiIndex
 #' @template author/JS
 #' @template cites/BERTINI_ET_STACH_2015

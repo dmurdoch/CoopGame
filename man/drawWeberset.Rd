@@ -4,8 +4,7 @@
 \alias{drawWeberset}
 \title{Draw Weber Set for 3 or 4 players}
 \usage{
-drawWeberset(v, holdOn = FALSE, colour = NA, label = FALSE,
-  name = "Weber Set")
+drawWeberset(v, holdOn = FALSE, colour = NA, label = FALSE, name = "Weber Set")
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

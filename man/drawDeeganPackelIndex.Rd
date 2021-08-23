@@ -4,8 +4,13 @@
 \alias{drawDeeganPackelIndex}
 \title{draw Deegan-Packel index for 3 or 4 players}
 \usage{
-drawDeeganPackelIndex(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Deegan Packel Index")
+drawDeeganPackelIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Deegan Packel Index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

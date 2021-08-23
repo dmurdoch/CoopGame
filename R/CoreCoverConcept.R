@@ -111,7 +111,6 @@ belongsToCoreCover<-function(x,v){
 #' @description drawCoreCover draws the core cover for 3 or 4 players.
 #' @aliases drawCoreCover
 #' @export drawCoreCover
-#' @import rgl
 #' @template author/JA
 #' @template author/JS
 #' @template cites/TIJS_LIPPERTS_1982

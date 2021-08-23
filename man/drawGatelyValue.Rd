@@ -4,8 +4,13 @@
 \alias{drawGatelyValue}
 \title{draw Gately point for 3 or 4 players}
 \usage{
-drawGatelyValue(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Gately Value")
+drawGatelyValue(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Gately Value"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

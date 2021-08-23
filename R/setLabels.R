@@ -6,6 +6,7 @@
 #' @param  pointsToDraw contains the points to draw
 #' @param  name set a name for the label
 #' @template author/FM
+#' @template author/JS
 #' @noRd
 
 setLabels <- function(A, pointsToDraw, name = NULL){
@@ -44,34 +45,37 @@ setLabels <- function(A, pointsToDraw, name = NULL){
     
   }
   else if (numberOfPlayers == 4)
-  {
-    X=rbind(c(-.05, -.05, -.05),  
-            c(1.25, 0, 0),
-            c(0.5, 0.6 * sqrt(3), 0),
-            c(0.5, 1/8 * sqrt(3), 1/3 *sqrt(6)))
-    
-    vertices = bary2cart(X,pointsToDraw/A[15])
-    
-    for(i in 1:rows)
-    {
-      #Set the content of the label
-      label = paste(sep="","(",pointsToDraw[i,1],",",pointsToDraw[i,2],",",pointsToDraw[i,3],",",pointsToDraw[i,4],")")
+  { 
+    if (requireNamespace("rgl", quietly = TRUE)) {
+      X=rbind(c(-.05, -.05, -.05),  
+              c(1.25, 0, 0),
+              c(0.5, 0.6 * sqrt(3), 0),
+              c(0.5, 1/8 * sqrt(3), 1/3 *sqrt(6)))
       
-      #Set the position of the label
-      labelpositionX = vertices[i,1]
-      labelpositionY = vertices[i,2]
-      labelpositionZ = vertices[i,3]
+      vertices = bary2cart(X,pointsToDraw/A[15])
       
-      if(rows == 1)
+      for(i in 1:rows)
       {
-        if(!is.null(name))
+        #Set the content of the label
+        label = paste(sep="","(",pointsToDraw[i,1],",",pointsToDraw[i,2],",",pointsToDraw[i,3],",",pointsToDraw[i,4],")")
+        
+        #Set the position of the label
+        labelpositionX = vertices[i,1]
+        labelpositionY = vertices[i,2]
+        labelpositionZ = vertices[i,3]
+        
+        if(rows == 1)
         {
-          label = name
+          if(!is.null(name))
+          {
+            label = name
+          }
         }
+        
+        rgl::text3d(labelpositionX, labelpositionY, labelpositionZ, label, col = "black")
       }
-      
-      text3d(labelpositionX, labelpositionY, labelpositionZ, label, col = "black")
-    }
+    } else
+    { print("Please install the package 'rgl' in order to generate plots visualizing 4-player TU games")}
   }
   
 }

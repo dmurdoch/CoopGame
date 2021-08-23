@@ -4,8 +4,13 @@
 \alias{drawShapleyShubikIndex}
 \title{Draw Shapley-Shubik index for 3 or 4 players}
 \usage{
-drawShapleyShubikIndex(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Shapley-Shubik index")
+drawShapleyShubikIndex(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Shapley-Shubik index"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

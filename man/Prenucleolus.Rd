@@ -16,6 +16,7 @@ Numeric vector of length n representing the prenucleolus.
 }
 \description{
 Computes the prenucleolus of a TU game with n players.
+Note that the prenucleolus is a member of the set of preimputations.
 }
 \examples{
 library(CoopGame)
@@ -50,4 +51,8 @@ Peleg B. and Sudhoelter P. (2007) \emph{Theory of cooperative games}, 2nd Editio
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
+
+Daniel Gebele \email{daniel.a.gebele@stud.hs-kempten.de}
 }

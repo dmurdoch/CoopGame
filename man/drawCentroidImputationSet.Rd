@@ -4,8 +4,13 @@
 \alias{drawCentroidImputationSet}
 \title{draw centroid of imputation set for 3 or 4 players}
 \usage{
-drawCentroidImputationSet(v, holdOn = FALSE, colour = NA,
-  label = TRUE, name = "centroid of imputation set")
+drawCentroidImputationSet(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "centroid of imputation set"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

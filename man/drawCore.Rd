@@ -4,8 +4,7 @@
 \alias{drawCore}
 \title{Draw core for 3 or 4 players}
 \usage{
-drawCore(v, holdOn = FALSE, colour = "red", label = FALSE,
-  name = "Core")
+drawCore(v, holdOn = FALSE, colour = "red", label = FALSE, name = "Core")
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

@@ -3,6 +3,8 @@
 \name{publicHelpChiIndex}
 \alias{publicHelpChiIndex}
 \alias{publicHelpIndexChi}
+\alias{publicHelpXiIndex}
+\alias{publicHelpIndexXi}
 \title{Compute Public Help index Chi}
 \usage{
 publicHelpChiIndex(v)
@@ -16,6 +18,8 @@ Public Help index Chi for specified simple game
 }
 \description{
 Calculates the Public Help index Chi for a specified simple TU game.
+Note that the greek letter Xi (instead of Chi) was used in the 
+original paper by Bertini and Stach (2015).
 }
 \examples{
 library(CoopGame)

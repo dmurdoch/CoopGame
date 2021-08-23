@@ -2,7 +2,9 @@
 #' @title Compute (normalized) Public Help value Chi
 #' @description Calculates the (normalized) Public Help value Chi 
 #' by Bertini & Stach (2015) for a nonnegative TU game.
-#' @aliases publicHelpChiValue publicHelpValueChi
+#' Note that the greek letter Xi (instead of Chi) was used in the 
+#' original paper by Bertini and Stach (2015). 
+#' @aliases publicHelpChiValue publicHelpValueChi publicHelpXiValue publicHelpValueXi
 #' @export publicHelpChiValue
 #' @template author/JS
 #' @template cites/BERTINI_ET_STACH_2015
@@ -40,7 +42,9 @@ publicHelpChiValue<-function(v)
 #' Note that in general the absolute Public Help value Chi is not an 
 #' efficient vector, i.e. the sum of its entries is not always 1. Hence no 
 #' drawing routine for the absolute Public Help value Chi is provided.
-#' @aliases absolutePublicHelpChiValue absolutePublicHelpValueChi
+#' Note that the greek letter Xi (instead of Chi) was used in the 
+#' original paper by Bertini and Stach (2015). 
+#' @aliases absolutePublicHelpChiValue absolutePublicHelpValueChi absolutePublicHelpXiValue absolutePublicHelpValueXi
 #' @export absolutePublicHelpChiValue
 #' @template author/JS
 #' @template cites/BERTINI_ET_STACH_2015

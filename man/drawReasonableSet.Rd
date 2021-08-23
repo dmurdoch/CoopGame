@@ -4,8 +4,13 @@
 \alias{drawReasonableSet}
 \title{Draw reasonable set for 3 or 4 players}
 \usage{
-drawReasonableSet(v, holdOn = FALSE, colour = NA, label = FALSE,
-  name = "Reasonable Set")
+drawReasonableSet(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = FALSE,
+  name = "Reasonable Set"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

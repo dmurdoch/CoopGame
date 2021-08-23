@@ -4,7 +4,6 @@
 #' @description Draws the imputation of a TU game.
 #' @aliases imputationsetDraw
 #' @import geometry
-#' @import rgl
 #' @import rcdd
 #' @importFrom graphics plot plot.new polygon
 # @export imputationsetDraw
@@ -12,6 +11,7 @@
 #' @template author/FT
 #' @template author/AM
 #' @template author/FM
+#' @template author/JS
 #' @param A  is a numeric vector of dimension 1x7 (3 players) or 1x15 (4 players)
 #' @param label  logical; is a parameter for set a label for the edge points
 #' @examples
@@ -69,9 +69,12 @@ imputationsetDraw <- function(A, label=TRUE){
         #Get the convex hull
         ConvHull <- convhulln(vertices)
         ts.surf <- t(ConvHull)
-        #Draws with the function of rgl the imputation set
-        rgl.bg(color = "white")
-        rgl.linestrips(vertices[ts.surf, 1], vertices[ts.surf, 2], vertices[ts.surf, 3], col = "black", alpha=0.8, smooth=FALSE, lit=FALSE)
+        #Draw the imputation set using the function from rgl
+        if (requireNamespace("rgl", quietly = TRUE)) {
+          rgl::rgl.bg(color = "white")
+          rgl::rgl.linestrips(vertices[ts.surf, 1], vertices[ts.surf, 2], vertices[ts.surf, 3], col = "black", alpha=0.8, smooth=FALSE, lit=FALSE)
+        } else
+        { print("Please install the package 'rgl' in order to generate plots visualizing 4-player TU games")}
 
         
         #If label=TRUE, a label is added

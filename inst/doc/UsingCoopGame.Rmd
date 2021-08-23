@@ -17,26 +17,26 @@ vignette: >
 bibliography: references.bib
 csl: biomed-central.csl
 abstract: "This document gives a brief and 
-concise overview of the various functionalities 
-of the package `CoopGame` 
-and presents a few use cases. In particular, we 
-introduce the capabilities of `CoopGame` to create 
-special families of cooperative games, to check 
-game properties and to compute set-valued and 
-point-valued solutions. We also introduce the 
-usage of `CoopGame` for visualizing set-valued and 
-point-valued solutions in the case of three or 
-four players. We end with a brief outlook to future 
-developments. This vignette accompanies version 
-0.2.1 of the package `CoopGame`.\n\n**Keywords**: 
-Cooperative game theory, bankruptcy games, cost games, 
-simple games, unanimity games, weighted voting games,  
-game properties, set-valued solution concepts, 
-point-valued solution concepts, 
-imputation, core, Weber set, Shapley value, 
-Banzhaf value, nucleolus, nucleolus derivatives, 
-modiclus, Gately point, Tau value, 
-power indices."
+   concise overview of the various functionalities 
+   of the package `CoopGame` 
+   and presents a few use cases. In particular, we 
+   introduce the capabilities of `CoopGame` to create 
+   special families of cooperative games, to check 
+   game properties and to compute set-valued and 
+   point-valued solutions. We also introduce the 
+   usage of `CoopGame` for visualizing set-valued and 
+   point-valued solutions in the case of three or 
+   four players. We end with a brief outlook to future 
+   developments. This vignette accompanies version 
+   0.2.2 of the package `CoopGame`.\n\n**Keywords**: 
+   Cooperative game theory, bankruptcy games, cost games, 
+   simple games, unanimity games, weighted voting games,  
+   game properties, set-valued solution concepts, 
+   point-valued solution concepts, 
+   imputation, core, Weber set, Shapley value, 
+   Banzhaf value, nucleolus, nucleolus derivatives, 
+   modiclus, Gately point, Tau value, 
+   power indices."
 header-includes:
 - \usepackage{titling}
 - \preauthor{\begin{center}\large\includegraphics[width=15cm]{media/CoopGameLogo.png}\\[\smallskipamount]}

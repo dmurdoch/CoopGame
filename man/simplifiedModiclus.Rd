@@ -16,6 +16,7 @@ of the specified TU game.
 }
 \description{
 Computes the simplified modiclus of a TU game with a non-empty imputation set and n players.
+Note that the simplified modiclus is a member of the set of preimputations.
 }
 \examples{
 library(CoopGame)
@@ -38,4 +39,6 @@ Tarashnina S. (2011) "The simplified modified nucleolus of a cooperative TU-game
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
 }

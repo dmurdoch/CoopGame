@@ -4,8 +4,7 @@
 \alias{drawModiclus}
 \title{Draw modiclus for 3 or 4 players}
 \usage{
-drawModiclus(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Modiclus")
+drawModiclus(v, holdOn = FALSE, colour = NA, label = TRUE, name = "Modiclus")
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

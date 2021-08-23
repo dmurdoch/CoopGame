@@ -4,8 +4,13 @@
 \alias{drawPerCapitaNucleolus}
 \title{Draw per capita nucleolus for 3 or 4 players}
 \usage{
-drawPerCapitaNucleolus(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "Per Capita Nucleolus")
+drawPerCapitaNucleolus(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "Per Capita Nucleolus"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

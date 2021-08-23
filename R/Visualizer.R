@@ -11,6 +11,7 @@
 #' @param  label activates the labels for the figure
 #' @param  name set a name for the label
 #' @template author/FM
+#' @template author/JS
 visualize <- function(A, pointsToDraw, holdOn=FALSE, colour = NA , label=FALSE, name = NULL){
   if(is.vector(pointsToDraw)){
     n=getNumberOfPlayers(A)
@@ -80,44 +81,46 @@ logicVisualizer <- function(A, pointsToDraw, holdOn, colour, label, name){
       
       #there are 4 players
       else if(numberOfPlayers == 4)
-      {
-        if(holdOn==FALSE){
-          #Closes all rgl windows
-          while(rgl.cur()>0){
-            rgl.close();
+      { if (requireNamespace("rgl", quietly = TRUE)) {
+          if(holdOn==FALSE){
+            #Closes all rgl windows
+            while(rgl::rgl.cur()>0){
+              rgl::rgl.close();
+            }
+            imputationsetDraw(A, label=TRUE)
           }
-          imputationsetDraw(A, label=TRUE)
-        }
-        
-        #Checks the number of points and decide the kind of drawing
-        if(rows == 1)
-        {
-          Visualizer4Point(A = A, pointsToDraw = pointsToDraw, colour = colour, label = label, name = name)
-        }
-        else if(rows >= numberOfPlayers)
-        {
-          Visualizer4Set(A = A, pointsToDraw = pointsToDraw, colour = colour, label = label, name = name)
+          
+          #Checks the number of points and decide the kind of drawing
+          if(rows == 1)
+          {
+            Visualizer4Point(A = A, pointsToDraw = pointsToDraw, colour = colour, label = label, name = name)
+          }
+          else if(rows >= numberOfPlayers)
+          {
+            Visualizer4Set(A = A, pointsToDraw = pointsToDraw, colour = colour, label = label, name = name)
+          }
+          else
+          {
+            print("There are too few points for a 3D-draw!")
+          }
         }
         else
         {
-          print("There are too few points for a 3D-draw!")
+          print("The program can only draw if there are 3 or 4 players - that means 3 or 4 columns")
         }
       }
       else
       {
-        print("The program can only draw if there are 3 or 4 players - that means 3 or 4 columns")
+        print("There are no points to draw!")
       }
-    }
-    else
-    {
-      print("There are no points to draw!")
-    }
-    }
-    else
-    {
-      print("The imputation set as frame of the drawing has too few points")
-    }
-  }
+      }
+      else
+      {
+        print("The imputation set as frame of the drawing has too few points")
+      }
+    } else
+    { print("Please install the package 'rgl' in order to generate plots visualizing 4-player TU games")}
+  }  
   else
   {
     print("The game vector does not fit with the number of players of the points of the convex hull!")

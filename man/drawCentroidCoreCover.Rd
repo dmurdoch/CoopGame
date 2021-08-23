@@ -4,8 +4,13 @@
 \alias{drawCentroidCoreCover}
 \title{draw centroid of core cover for 3 or 4 players}
 \usage{
-drawCentroidCoreCover(v, holdOn = FALSE, colour = NA, label = TRUE,
-  name = "centroid of core cover")
+drawCentroidCoreCover(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = TRUE,
+  name = "centroid of core cover"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

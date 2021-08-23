@@ -4,8 +4,7 @@
 \alias{stopOnInvalidCoalitionS}
 \title{Parameter Function stopOnInvalidCoalitionS}
 \usage{
-stopOnInvalidCoalitionS(paramCheckResult, S, N = NULL, n = NULL,
-  v = NULL)
+stopOnInvalidCoalitionS(paramCheckResult, S, N = NULL, n = NULL, v = NULL)
 }
 \arguments{
 \item{paramCheckResult}{list object for check result with list element 'errCode' for the error code
@@ -44,24 +43,25 @@ stopOnInvalidCoalitionS(paramCheckResult, S=validCoalition, N=c(1,2,3,4,5))
 
 }
 \seealso{
-Other ParameterChecks_CoopGame: \code{\link{getEmptyParamCheckResult}},
-  \code{\link{stopOnInconsistentEstateAndClaimsVector}},
-  \code{\link{stopOnInvalidAllocation}},
-  \code{\link{stopOnInvalidBoolean}},
-  \code{\link{stopOnInvalidClaimsVector}},
-  \code{\link{stopOnInvalidDictator}},
-  \code{\link{stopOnInvalidEstate}},
-  \code{\link{stopOnInvalidGameVector}},
-  \code{\link{stopOnInvalidGrandCoalitionN}},
-  \code{\link{stopOnInvalidIndex}},
-  \code{\link{stopOnInvalidLeftRightGloveGame}},
-  \code{\link{stopOnInvalidNChooseB}},
-  \code{\link{stopOnInvalidNumberOfPlayers}},
-  \code{\link{stopOnInvalidNumber}},
-  \code{\link{stopOnInvalidQuota}},
-  \code{\link{stopOnInvalidVetoPlayer}},
-  \code{\link{stopOnInvalidWeightVector}},
-  \code{\link{stopOnParamCheckError}}
+Other ParameterChecks_CoopGame: 
+\code{\link{getEmptyParamCheckResult}()},
+\code{\link{stopOnInconsistentEstateAndClaimsVector}()},
+\code{\link{stopOnInvalidAllocation}()},
+\code{\link{stopOnInvalidBoolean}()},
+\code{\link{stopOnInvalidClaimsVector}()},
+\code{\link{stopOnInvalidDictator}()},
+\code{\link{stopOnInvalidEstate}()},
+\code{\link{stopOnInvalidGameVector}()},
+\code{\link{stopOnInvalidGrandCoalitionN}()},
+\code{\link{stopOnInvalidIndex}()},
+\code{\link{stopOnInvalidLeftRightGloveGame}()},
+\code{\link{stopOnInvalidNChooseB}()},
+\code{\link{stopOnInvalidNumberOfPlayers}()},
+\code{\link{stopOnInvalidNumber}()},
+\code{\link{stopOnInvalidQuota}()},
+\code{\link{stopOnInvalidVetoPlayer}()},
+\code{\link{stopOnInvalidWeightVector}()},
+\code{\link{stopOnParamCheckError}()}
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}

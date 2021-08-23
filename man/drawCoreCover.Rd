@@ -4,8 +4,13 @@
 \alias{drawCoreCover}
 \title{Draw core cover for 3 or 4 players}
 \usage{
-drawCoreCover(v, holdOn = FALSE, colour = NA, label = FALSE,
-  name = "Core Cover")
+drawCoreCover(
+  v,
+  holdOn = FALSE,
+  colour = NA,
+  label = FALSE,
+  name = "Core Cover"
+)
 }
 \arguments{
 \item{v}{Numeric vector of length 2^n - 1 representing the values of 

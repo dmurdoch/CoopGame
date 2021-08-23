@@ -15,7 +15,8 @@ Numeric vector of length \code{n}
 representing the disruption nucleolus of the specified TU game
 }
 \description{
-Computes the disruption nucleolus of a balanced TU game with n players
+Computes the disruption nucleolus of a balanced TU game with n players.
+Note that the disruption nucleolus needs to be a member of the core.
 }
 \examples{
 library(CoopGame)
@@ -35,4 +36,6 @@ Littlechild S.C. and Vaidya K.G. (1976) "The propensity to disrupt and the disru
 }
 \author{
 Jochen Staudacher \email{jochen.staudacher@hs-kempten.de}
+
+Johannes Anwander \email{anwander.johannes@gmail.com}
 }

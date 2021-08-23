@@ -112,7 +112,7 @@ logicapexGameValue<-function(S,n,apexPlayer){
 #' @section Related Functions: 
 #' \link{apexGameValue}, \link{apexGameVector}
 #' @examples 
-#' #' library(CoopGame)
+#' library(CoopGame)
 #' apexGameVector(n=3,apexPlayer=2)
 #' 
 #' \donttest{
