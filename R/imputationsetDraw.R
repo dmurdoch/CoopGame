@@ -71,8 +71,8 @@ imputationsetDraw <- function(A, label=TRUE){
         ts.surf <- t(ConvHull)
         #Draw the imputation set using the function from rgl
         if (requireNamespace("rgl", quietly = TRUE)) {
-          rgl::rgl.bg(color = "white")
-          rgl::rgl.linestrips(vertices[ts.surf, 1], vertices[ts.surf, 2], vertices[ts.surf, 3], col = "black", alpha=0.8, smooth=FALSE, lit=FALSE)
+          rgl::bg3d(color = "white")
+          rgl::lines3d(vertices[ts.surf, 1], vertices[ts.surf, 2], vertices[ts.surf, 3], col = "black", alpha=0.8, smooth=FALSE, lit=FALSE)
         } else
         { print("Please install the package 'rgl' in order to generate plots visualizing 4-player TU games")}
 

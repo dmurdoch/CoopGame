@@ -28,7 +28,7 @@ Visualizer4Set <- function(A, pointsToDraw, colour, label, name){
     ConvHull <- convhulln(vertices)
     ts.surf <- t(ConvHull)
     #Draws with the function of rgl the set
-    rgl::rgl.triangles(vertices[ts.surf, 1], vertices[ts.surf, 2], vertices[ts.surf, 3], col = colour, alpha=0.8, smooth=FALSE, lit=FALSE)
+    rgl::triangles3d(vertices[ts.surf, 1], vertices[ts.surf, 2], vertices[ts.surf, 3], col = colour, alpha=0.8, smooth=FALSE, lit=FALSE)
     
     #Label
     if(label == TRUE)

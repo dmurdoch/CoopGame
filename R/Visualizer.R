@@ -84,8 +84,8 @@ logicVisualizer <- function(A, pointsToDraw, holdOn, colour, label, name){
       { if (requireNamespace("rgl", quietly = TRUE)) {
           if(holdOn==FALSE){
             #Closes all rgl windows
-            while(rgl::rgl.cur()>0){
-              rgl::rgl.close();
+            while(rgl::cur3d()>0){
+              rgl::close3d();
             }
             imputationsetDraw(A, label=TRUE)
           }
